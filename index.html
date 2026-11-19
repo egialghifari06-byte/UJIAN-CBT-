@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>K-CBT | SMPN 1 HAURWANGI</title>
+  <title>K-CBT | SMPN 1 HAURWANGI (Supabase Cloud Ready)</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
     body { font-family: 'Inter', sans-serif; }
@@ -16,13 +17,18 @@
 <body class="bg-slate-100 text-slate-900 antialiased selection:bg-amber-300">
   <div id="root"></div>
   <script>
-    const INITIAL_PAYLOAD = {"students":[{"id":"stu-7a-1","nis":"262707001","name":"ADITYA PRATAMA","className":"7A","grade":"7","password":"123","passwordLocked":false,"isActive":true,"isAllowed":true,"violations":0},{"id":"stu-7a-2","nis":"262707002","name":"AULIA RAHMAWATI","className":"7A","grade":"7","password":"123","passwordLocked":false,"isActive":true,"isAllowed":true,"violations":0},{"id":"stu-7b-1","nis":"262707003","name":"BAGAS SAPUTRA","className":"7B","grade":"7","password":"123","passwordLocked":false,"isActive":true,"isAllowed":true,"violations":0},{"id":"stu-8a-1","nis":"252608001","name":"CITRA DEWI LESTARI","className":"8A","grade":"8","password":"123","passwordLocked":false,"isActive":true,"isAllowed":true,"violations":0},{"id":"stu-8b-1","nis":"252608002","name":"DIMAS ANGGARA","className":"8B","grade":"8","password":"123","passwordLocked":false,"isActive":true,"isAllowed":true,"violations":0},{"id":"stu-9a-1","nis":"242509001","name":"ELSA PUTRI MAHARANI","className":"9A","grade":"9","password":"123","passwordLocked":false,"isActive":true,"isAllowed":true,"violations":0},{"id":"stu-9b-1","nis":"242509002","name":"FAJAR NUGRAHA","className":"9B","grade":"9","password":"123","passwordLocked":false,"isActive":true,"isAllowed":true,"violations":0}],"staffAccounts":[{"id":"stf-1","name":"Administrator K-CBT","username":"admin","role":"admin","password":"123"},{"id":"stf-2","name":"Dra. Siti Aminah, M.Pd.","username":"guru1","role":"guru","password":"123"},{"id":"stf-3","name":"Budi Santoso, S.Kom.","username":"proktor1","role":"proktor","password":"123"}],"exams":[{"id":"ex-7-mtk","subject":"Matematika","grade":"7","durationMinutes":60,"isActive":true,"shuffleQuestions":true,"shuffleOptions":true,"date":"2026-11-17"},{"id":"ex-8-ipa","subject":"Ilmu Pengetahuan Alam (IPA)","grade":"8","durationMinutes":60,"isActive":true,"shuffleQuestions":true,"shuffleOptions":true,"date":"2026-11-17"},{"id":"ex-9-bindo","subject":"Bahasa Indonesia","grade":"9","durationMinutes":60,"isActive":true,"shuffleQuestions":false,"shuffleOptions":false,"date":"2026-11-17"}],"questions":[{"id":"q-1","subject":"Matematika","grade":"7","type":"PG","weight":20,"prompt":"Hasil dari (-15) + 28 - (-12) adalah ...","options":{"A":"15","B":"25","C":"31","D":"55"},"hasOptionE":false,"correctOption":"B"},{"id":"q-2","subject":"Matematika","grade":"7","type":"PGK","weight":20,"prompt":"Manakah di antara bilangan berikut yang merupakan bilangan prima? (Pilih lebih dari satu)","options":{"A":"11","B":"15","C":"17","D":"21"},"hasOptionE":false,"correctOptions":["A","C"]},{"id":"q-3","subject":"Matematika","grade":"7","type":"BS","weight":20,"prompt":"Tentukan nilai kebenaran dari setiap pernyataan aljabar berikut:","statements":[{"text":"2x + 3x = 5x","answer":"B"},{"text":"4(x - 2) = 4x - 2","answer":"S"}]},{"id":"q-4","subject":"Matematika","grade":"7","type":"ISIAN","weight":20,"prompt":"Keliling persegi dengan panjang sisi 14 cm adalah ... cm.","correctShortAnswer":"56"},{"id":"q-5","subject":"Matematika","grade":"7","type":"URAIAN","weight":20,"prompt":"Sebuah kolam berbentuk balok berukuran panjang 5 m, lebar 3 m, dan kedalaman 2 m. Hitunglah volume air maksimal yang dapat ditampung kolam tersebut dalam satuan liter!","essayRubric":"V = p x l x t = 5 x 3 x 2 = 30 m3 = 30.000 liter."},{"id":"q-6","subject":"Ilmu Pengetahuan Alam (IPA)","grade":"8","type":"PG","weight":50,"prompt":"Organel sel yang berfungsi sebagai tempat respirasi seluler dan penghasil energi (ATP) adalah ...","options":{"A":"Ribosom","B":"Mitokondria","C":"Lisosom","D":"Badan Golgi"},"hasOptionE":false,"correctOption":"B"},{"id":"q-7","subject":"Ilmu Pengetahuan Alam (IPA)","grade":"8","type":"URAIAN","weight":50,"prompt":"Jelaskan perbedaan fungsi pembuluh darah arteri dan vena pada sistem peredaran darah manusia!","essayRubric":"Arteri membawa darah keluar jantung (kaya O2), vena membawa darah kembali ke jantung (kaya CO2)."},{"id":"q-8","subject":"Bahasa Indonesia","grade":"9","type":"PG","weight":100,"prompt":"Kalimat utama yang terletak di awal paragraf disebut paragraf ...","options":{"A":"Induktif","B":"Deduktif","C":"Campuran","D":"Ineratif"},"hasOptionE":false,"correctOption":"B"}],"results":[{"id":"res-sample-1","studentId":"stu-7a-2","nis":"262707002","studentName":"AULIA RAHMAWATI","className":"7A","subject":"Matematika","score":80,"needsEssayGrading":true,"answers":{"q-1":"B","q-2":["A","C"],"q-4":"56","q-5":"Volume = 5 x 3 x 2 = 30 m3 = 30.000 liter"},"essayScores":{"q-5":0},"submittedAt":"17/11/2026 08:45"}],"examToken":"PPE6UH"};
+    const INITIAL_PAYLOAD = {"students":[{"id":"stu-7a-1","nis":"262707001","name":"ADITYA PRATAMA","className":"7A","grade":"7","password":"123","passwordLocked":false,"isActive":true,"isAllowed":true,"violations":0},{"id":"stu-7a-2","nis":"262707002","name":"AULIA RAHMAWATI","className":"7A","grade":"7","password":"123","passwordLocked":false,"isActive":true,"isAllowed":true,"violations":0},{"id":"stu-7b-1","nis":"262707003","name":"BAGAS SAPUTRA","className":"7B","grade":"7","password":"123","passwordLocked":false,"isActive":true,"isAllowed":true,"violations":0},{"id":"stu-8a-1","nis":"252608001","name":"CITRA DEWI LESTARI","className":"8A","grade":"8","password":"123","passwordLocked":false,"isActive":true,"isAllowed":true,"violations":0},{"id":"stu-8b-1","nis":"252608002","name":"DIMAS ANGGARA","className":"8B","grade":"8","password":"123","passwordLocked":false,"isActive":true,"isAllowed":true,"violations":0},{"id":"stu-9a-1","nis":"242509001","name":"ELSA PUTRI MAHARANI","className":"9A","grade":"9","password":"123","passwordLocked":false,"isActive":true,"isAllowed":true,"violations":0},{"id":"stu-9b-1","nis":"242509002","name":"FAJAR NUGRAHA","className":"9B","grade":"9","password":"123","passwordLocked":false,"isActive":true,"isAllowed":true,"violations":0}],"staffAccounts":[{"id":"stf-1","name":"Administrator K-CBT","username":"admin","role":"admin","password":"123"},{"id":"stf-2","name":"Dra. Siti Aminah, M.Pd.","username":"guru1","role":"guru","password":"123"},{"id":"stf-3","name":"Budi Santoso, S.Kom.","username":"proktor1","role":"proktor","password":"123"}],"exams":[{"id":"ex-7-mtk","subject":"Matematika","grade":"7","durationMinutes":60,"isActive":true,"shuffleQuestions":true,"shuffleOptions":true,"date":"2026-11-17"},{"id":"ex-8-ipa","subject":"Ilmu Pengetahuan Alam (IPA)","grade":"8","durationMinutes":60,"isActive":true,"shuffleQuestions":true,"shuffleOptions":true,"date":"2026-11-17"},{"id":"ex-9-bindo","subject":"Bahasa Indonesia","grade":"9","durationMinutes":60,"isActive":true,"shuffleQuestions":false,"shuffleOptions":false,"date":"2026-11-17"}],"questions":[{"id":"q-1","subject":"Matematika","grade":"7","type":"PG","weight":20,"prompt":"Hasil dari (-15) + 28 - (-12) adalah ...","options":{"A":"15","B":"25","C":"31","D":"55"},"hasOptionE":false,"correctOption":"B"},{"id":"q-2","subject":"Matematika","grade":"7","type":"PGK","weight":20,"prompt":"Manakah di antara bilangan berikut yang merupakan bilangan prima? (Pilih lebih dari satu)","options":{"A":"11","B":"15","C":"17","D":"21"},"hasOptionE":false,"correctOptions":["A","C"]},{"id":"q-3","subject":"Matematika","grade":"7","type":"BS","weight":20,"prompt":"Tentukan nilai kebenaran dari setiap pernyataan aljabar berikut:","statements":[{"text":"2x + 3x = 5x","answer":"B"},{"text":"4(x - 2) = 4x - 2","answer":"S"}]},{"id":"q-4","subject":"Matematika","grade":"7","type":"ISIAN","weight":20,"prompt":"Keliling persegi dengan panjang sisi 14 cm adalah ... cm.","correctShortAnswer":"56"},{"id":"q-5","subject":"Matematika","grade":"7","type":"URAIAN","weight":20,"prompt":"Sebuah kolam berbentuk balok berukuran panjang 5 m, lebar 3 m, dan kedalaman 2 m. Hitunglah volume air maksimal yang dapat ditampung kolam tersebut dalam satuan liter!","essayRubric":"V = p x l x t = 5 x 3 x 2 = 30 m3 = 30.000 liter."},{"id":"q-6","subject":"Ilmu Pengetahuan Alam (IPA)","grade":"8","type":"PG","weight":50,"prompt":"Organel sel yang berfungsi sebagai tempat respirasi seluler dan penghasil energi (ATP) adalah ...","options":{"A":"Ribosom","B":"Mitokondria","C":"Lisosom","D":"Badan Golgi"},"hasOptionE":false,"correctOption":"B"},{"id":"q-7","subject":"Ilmu Pengetahuan Alam (IPA)","grade":"8","type":"URAIAN","weight":50,"prompt":"Jelaskan perbedaan fungsi pembuluh darah arteri dan vena pada sistem peredaran darah manusia!","essayRubric":"Arteri membawa darah keluar jantung (kaya O2), vena membawa darah kembali ke jantung (kaya CO2)."},{"id":"q-8","subject":"Bahasa Indonesia","grade":"9","type":"PG","weight":100,"prompt":"Kalimat utama yang terletak di awal paragraf disebut paragraf ...","options":{"A":"Induktif","B":"Deduktif","C":"Campuran","D":"Ineratif"},"hasOptionE":false,"correctOption":"B"}],"results":[{"id":"res-sample-1","studentId":"stu-7a-2","nis":"262707002","studentName":"AULIA RAHMAWATI","className":"7A","subject":"Matematika","score":80,"needsEssayGrading":true,"answers":{"q-1":"B","q-2":["A","C"],"q-4":"56","q-5":"Volume = 5 x 3 x 2 = 30 m3 = 30.000 liter"},"essayScores":{"q-5":0},"submittedAt":"17/11/2026 08:45"}],"examToken":"G78GHW"};
     const { useState, useEffect, useMemo, useRef, useCallback } = React;
     const h = React.createElement;
 
     const SCHOOL_NAME = 'SMPN 1 HAURWANGI';
-    const STORAGE_KEY_HTML = 'kcbt_smpn1_haurwangi_standalone_v12';
+    const STORAGE_KEY_HTML = 'kcbt_smpn1_haurwangi_standalone_v13';
+    const SUPABASE_CFG_KEY = 'kcbt_smpn1_supabase_cfg_v1';
     const TOKEN_ROTATION_SECONDS = 600;
+
+    // Anda dapat menempelkan URL & Key Supabase secara permanen di sini atau lewat menu "Skema Next.js & Supabase"
+    const DEFAULT_SUPABASE_URL = 'https://zyrsldkloqxkqoaqeftz.supabase.co/rest/v1/';
+    const DEFAULT_SUPABASE_ANON_KEY = 'sb_publishable_OBW5DnkadsWPAZHwPH9Zcg_EVfM5Kzh';
 
     const CLASSES_7 = ['7A','7B','7C','7D','7E','7F','7G','7H','7I','7J','7K'];
     const CLASSES_8 = ['8A','8B','8C','8D','8E','8F','8G','8H','8I','8J'];
@@ -51,7 +57,6 @@
       return p.split('').sort(() => Math.random() - 0.5).join('');
     }
 
-    // Helper Ikon Lucide SVG
     function LucideIcon({ name, className = 'w-4 h-4' }) {
       const ref = useRef(null);
       useEffect(() => {
@@ -65,10 +70,90 @@
       return h('span', { ref, className: 'inline-flex items-center justify-center shrink-0' });
     }
 
+    // Mapper Data Aplikasi <-> Tabel Supabase
+    const mapStudentToDb = (s) => ({
+      nis: s.nis,
+      name: s.name,
+      class_name: s.className,
+      grade: s.grade,
+      password: s.password,
+      password_locked: Boolean(s.passwordLocked),
+      is_active: Boolean(s.isActive),
+      is_allowed: Boolean(s.isAllowed),
+      violations: Number(s.violations || 0),
+      last_violation_reason: s.lastViolationReason || ''
+    });
+
+    const mapStudentFromDb = (row) => ({
+      id: row.id || ('stu-' + row.nis),
+      nis: row.nis,
+      name: row.name,
+      className: row.class_name,
+      grade: row.grade,
+      password: row.password || '123',
+      passwordLocked: Boolean(row.password_locked),
+      isActive: row.is_active !== false,
+      isAllowed: row.is_allowed !== false,
+      violations: Number(row.violations || 0),
+      lastViolationReason: row.last_violation_reason || ''
+    });
+
+    const mapExamToDb = (ex) => ({
+      subject: ex.subject,
+      grade: ex.grade,
+      duration_minutes: Number(ex.durationMinutes || 60),
+      is_active: Boolean(ex.isActive),
+      shuffle_questions: Boolean(ex.shuffleQuestions),
+      shuffle_options: Boolean(ex.shuffleOptions),
+      exam_date: ex.date || new Date().toISOString().slice(0, 10)
+    });
+
+    const mapExamFromDb = (row) => ({
+      id: row.id,
+      subject: row.subject,
+      grade: row.grade,
+      durationMinutes: Number(row.duration_minutes || 60),
+      isActive: Boolean(row.is_active),
+      shuffleQuestions: Boolean(row.shuffle_questions),
+      shuffleOptions: Boolean(row.shuffle_options),
+      date: row.exam_date || new Date().toISOString().slice(0, 10)
+    });
+
+    const mapQuestionToDb = (q) => ({
+      subject: q.subject,
+      grade: q.grade,
+      type: q.type,
+      weight: Number(q.weight || 10),
+      prompt: q.prompt,
+      options: q.options || {},
+      has_option_e: Boolean(q.hasOptionE),
+      correct_option: q.correctOption || 'A',
+      correct_options: q.correctOptions || [],
+      statements: q.statements || [],
+      correct_short_answer: q.correctShortAnswer || '',
+      essay_rubric: q.essayRubric || ''
+    });
+
+    const mapQuestionFromDb = (row) => ({
+      id: row.id,
+      subject: row.subject,
+      grade: row.grade,
+      type: row.type,
+      weight: Number(row.weight || 10),
+      prompt: row.prompt,
+      options: row.options || {},
+      hasOptionE: Boolean(row.has_option_e),
+      correctOption: row.correct_option || 'A',
+      correctOptions: Array.isArray(row.correct_options) ? row.correct_options : [],
+      statements: Array.isArray(row.statements) ? row.statements : [],
+      correctShortAnswer: row.correct_short_answer || '',
+      essayRubric: row.essay_rubric || ''
+    });
+
     // ========================================================================
-    // 1. PORTAL LOGIN SISWA & GURU/PROKTOR (HTML OFFLINE)
+    // 1. PORTAL LOGIN SISWA & GURU/PROKTOR
     // ========================================================================
-    function LandingLoginPortalHtml({ onStudentLogin, onStaffLogin, onRestoreDefaultStaff }) {
+    function LandingLoginPortalHtml({ onStudentLogin, onStaffLogin, onRestoreDefaultStaff, supabaseConnected }) {
       const [tab, setTab] = useState('student');
       const [grade, setGrade] = useState('7');
       const [nis, setNis] = useState('');
@@ -88,12 +173,7 @@
           setErrorMsg('Harap lengkapi NIS/NISN, Password Siswa, dan Token Ujian.');
           return;
         }
-        const err = onStudentLogin({
-          grade,
-          nis,
-          password: studentPassword,
-          token
-        });
+        const err = onStudentLogin({ grade, nis, password: studentPassword, token });
         if (err) setErrorMsg(err);
       };
 
@@ -104,10 +184,7 @@
           setErrorMsg('Username dan Password Guru/Proktor wajib diisi.');
           return;
         }
-        const err = onStaffLogin({
-          username: staffUsername,
-          password: staffPassword
-        });
+        const err = onStaffLogin({ username: staffUsername, password: staffPassword });
         if (err) setErrorMsg(err);
       };
 
@@ -115,9 +192,14 @@
         h('div', { className: 'max-w-5xl w-full grid lg:grid-cols-12 gap-6 items-stretch' },
           h('div', { className: 'lg:col-span-5 bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-7 text-white flex flex-col justify-between space-y-6' },
             h('div', { className: 'space-y-4' },
-              h('div', { className: 'inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/20 border border-amber-400/30 text-amber-300 text-xs font-extrabold' },
-                h(LucideIcon, { name: 'ShieldCheck', className: 'w-4 h-4' }),
-                h('span', null, 'COMPUTER BASED TEST (K-CBT)')
+              h('div', { className: 'flex flex-wrap items-center gap-2' },
+                h('div', { className: 'inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/20 border border-amber-400/30 text-amber-300 text-xs font-extrabold' },
+                  h(LucideIcon, { name: 'ShieldCheck', className: 'w-4 h-4' }),
+                  h('span', null, 'COMPUTER BASED TEST (K-CBT)')
+                ),
+                h('span', { className: 'px-2.5 py-1 rounded-full text-[10px] font-black ' + (supabaseConnected ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-400/30' : 'bg-slate-700/60 text-slate-300') },
+                  supabaseConnected ? '● Cloud Supabase Aktif' : '○ Mode Lokal'
+                )
               ),
               h('div', null,
                 h('h1', { className: 'text-2xl sm:text-3xl font-black tracking-tight text-white' }, SCHOOL_NAME),
@@ -179,62 +261,30 @@
                     h('label', { className: 'block text-xs font-extrabold text-slate-700 mb-1.5' }, 'Pilih Kategori Tingkat Kelas'),
                     h('div', { className: 'grid grid-cols-3 gap-2.5' },
                       ['7', '8', '9'].map((g) => h('button', {
-                        key: g,
-                        type: 'button',
-                        onClick: () => setGrade(g),
+                        key: g, type: 'button', onClick: () => setGrade(g),
                         className: 'py-2.5 rounded-xl text-xs font-black border transition ' + (grade === g ? 'bg-amber-500 border-amber-600 text-slate-950 shadow-sm' : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100')
                       }, 'Kelas ' + g))
                     )
                   ),
                   h('div', null,
                     h('label', { className: 'block text-xs font-extrabold text-slate-700 mb-1' }, 'NIS / NISN Peserta'),
-                    h('input', {
-                      type: 'text',
-                      autoComplete: 'off',
-                      value: nis,
-                      onChange: (e) => setNis(e.target.value),
-                      placeholder: 'Masukkan NIS atau NISN Anda',
-                      className: 'w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-xs font-bold'
-                    })
+                    h('input', { type: 'text', autoComplete: 'off', value: nis, onChange: (e) => setNis(e.target.value), placeholder: 'Masukkan NIS atau NISN Anda', className: 'w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 text-xs font-bold' })
                   ),
                   h('div', null,
                     h('label', { className: 'block text-xs font-extrabold text-slate-700 mb-1' }, 'Password Peserta'),
                     h('div', { className: 'relative' },
-                      h('input', {
-                        type: showStudentPwd ? 'text' : 'password',
-                        autoComplete: 'new-password',
-                        value: studentPassword,
-                        onChange: (e) => setStudentPassword(e.target.value),
-                        placeholder: 'Masukkan Password dari Kartu Login',
-                        className: 'w-full px-4 py-3 pr-11 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-xs font-bold'
-                      }),
-                      h('button', {
-                        type: 'button',
-                        onClick: () => setShowStudentPwd((v) => !v),
-                        className: 'absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700'
-                      }, h(LucideIcon, { name: showStudentPwd ? 'EyeOff' : 'Eye', className: 'w-4 h-4' }))
+                      h('input', { type: showStudentPwd ? 'text' : 'password', autoComplete: 'new-password', value: studentPassword, onChange: (e) => setStudentPassword(e.target.value), placeholder: 'Masukkan Password dari Kartu Login', className: 'w-full px-4 py-3 pr-11 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 text-xs font-bold' }),
+                      h('button', { type: 'button', onClick: () => setShowStudentPwd((v) => !v), className: 'absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700' }, h(LucideIcon, { name: showStudentPwd ? 'EyeOff' : 'Eye', className: 'w-4 h-4' }))
                     )
                   ),
                   h('div', null,
                     h('label', { className: 'block text-xs font-extrabold text-slate-700 mb-1' }, 'Token Ujian'),
                     h('div', { className: 'relative' },
-                      h('span', { className: 'text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2' },
-                        h(LucideIcon, { name: 'KeyRound', className: 'w-4 h-4' })
-                      ),
-                      h('input', {
-                        type: 'text',
-                        autoComplete: 'off',
-                        value: token,
-                        onChange: (e) => setToken(e.target.value.toUpperCase()),
-                        placeholder: 'Masukkan Token dari Pengawas',
-                        className: 'w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 font-mono text-xs font-black uppercase tracking-widest'
-                      })
+                      h('span', { className: 'text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2' }, h(LucideIcon, { name: 'KeyRound', className: 'w-4 h-4' })),
+                      h('input', { type: 'text', autoComplete: 'off', value: token, onChange: (e) => setToken(e.target.value.toUpperCase()), placeholder: 'Masukkan Token dari Pengawas', className: 'w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 font-mono text-xs font-black uppercase tracking-widest' })
                     )
                   ),
-                  h('button', {
-                    type: 'submit',
-                    className: 'w-full py-3.5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-black text-xs tracking-wide shadow-lg transition flex items-center justify-center gap-2'
-                  },
+                  h('button', { type: 'submit', className: 'w-full py-3.5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-black text-xs tracking-wide shadow-lg transition flex items-center justify-center gap-2' },
                     h(LucideIcon, { name: 'ShieldCheck', className: 'w-4 h-4 text-amber-400' }),
                     h('span', null, 'MASUK & MULAI UJIAN')
                   )
@@ -242,43 +292,18 @@
               : h('form', { onSubmit: handleSubmitStaff, className: 'space-y-4' },
                   h('div', null,
                     h('label', { className: 'block text-xs font-extrabold text-slate-700 mb-1' }, 'Username Guru / Proktor / Admin'),
-                    h('input', {
-                      type: 'text',
-                      autoComplete: 'off',
-                      value: staffUsername,
-                      onChange: (e) => setStaffUsername(e.target.value),
-                      placeholder: 'Masukkan Username Anda',
-                      className: 'w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 text-xs font-bold'
-                    })
+                    h('input', { type: 'text', autoComplete: 'off', value: staffUsername, onChange: (e) => setStaffUsername(e.target.value), placeholder: 'Masukkan Username Anda', className: 'w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 text-xs font-bold' })
                   ),
                   h('div', null,
                     h('label', { className: 'block text-xs font-extrabold text-slate-700 mb-1' }, 'Password'),
                     h('div', { className: 'relative' },
-                      h('input', {
-                        type: showStaffPwd ? 'text' : 'password',
-                        autoComplete: 'new-password',
-                        value: staffPassword,
-                        onChange: (e) => setStaffPassword(e.target.value),
-                        placeholder: 'Masukkan Password Anda',
-                        className: 'w-full px-4 py-3 pr-11 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 text-xs font-bold'
-                      }),
-                      h('button', {
-                        type: 'button',
-                        onClick: () => setShowStaffPwd((v) => !v),
-                        className: 'absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700'
-                      }, h(LucideIcon, { name: showStaffPwd ? 'EyeOff' : 'Eye', className: 'w-4 h-4' }))
+                      h('input', { type: showStaffPwd ? 'text' : 'password', autoComplete: 'new-password', value: staffPassword, onChange: (e) => setStaffPassword(e.target.value), placeholder: 'Masukkan Password Anda', className: 'w-full px-4 py-3 pr-11 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 text-xs font-bold' }),
+                      h('button', { type: 'button', onClick: () => setShowStaffPwd((v) => !v), className: 'absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700' }, h(LucideIcon, { name: showStaffPwd ? 'EyeOff' : 'Eye', className: 'w-4 h-4' }))
                     )
                   ),
-                  h('button', {
-                    type: 'submit',
-                    className: 'w-full py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-black text-xs tracking-wide shadow-lg transition'
-                  }, 'MASUK DASHBOARD PENGELOLA'),
+                  h('button', { type: 'submit', className: 'w-full py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-black text-xs tracking-wide shadow-lg transition' }, 'MASUK DASHBOARD PENGELOLA'),
                   h('div', { className: 'pt-2 flex justify-end' },
-                    h('button', {
-                      type: 'button',
-                      onClick: onRestoreDefaultStaff,
-                      className: 'text-[11px] font-bold text-slate-500 hover:text-indigo-700 underline'
-                    }, 'Pulihkan Akses Staf Default')
+                    h('button', { type: 'button', onClick: onRestoreDefaultStaff, className: 'text-[11px] font-bold text-slate-500 hover:text-indigo-700 underline' }, 'Pulihkan Akses Staf Default')
                   )
                 )
           )
@@ -287,7 +312,7 @@
     }
 
     // ========================================================================
-    // 2. ANTARMUKA UJIAN SISWA (HTML OFFLINE)
+    // 2. ANTARMUKA UJIAN SISWA
     // ========================================================================
     function StudentExamInterfaceHtml({ student, session, onSubmitExam, onForceTerminateCheating }) {
       const { exam, questions } = session;
@@ -329,9 +354,7 @@
       useEffect(() => {
         const timer = setInterval(() => {
           const now = Date.now();
-          if (now - lastTickTimeRef.current > 2500) {
-            screenOffGraceUntilRef.current = now + 4000;
-          }
+          if (now - lastTickTimeRef.current > 2500) screenOffGraceUntilRef.current = now + 4000;
           lastTickTimeRef.current = now;
           setSecondsLeft((prev) => {
             if (prev <= 1) {
@@ -376,9 +399,7 @@
             setTimeout(() => {
               if (Date.now() < screenOffGraceUntilRef.current) return;
               if (document.visibilityState === 'hidden' && document.hasFocus()) return;
-              if (document.hidden) {
-                recordViolation('Terdeteksi meninggalkan halaman ujian / membuka tab lain.');
-              }
+              if (document.hidden) recordViolation('Terdeteksi meninggalkan halaman ujian / membuka tab lain.');
             }, 600);
           }
         };
@@ -386,9 +407,7 @@
           setTimeout(() => {
             if (Date.now() < screenOffGraceUntilRef.current) return;
             if (document.visibilityState === 'hidden' && document.hasFocus()) return;
-            if (!document.hasFocus()) {
-              recordViolation('Jendela ujian kehilangan fokus / berpindah aplikasi.');
-            }
+            if (!document.hasFocus()) recordViolation('Jendela ujian kehilangan fokus / berpindah aplikasi.');
           }, 600);
         };
         const onFs = () => {
@@ -448,16 +467,10 @@
           ),
           h('div', { className: 'flex flex-wrap items-center gap-2.5' },
             !isFullscreen && h('button', {
-              type: 'button',
-              onClick: enterFullscreen,
+              type: 'button', onClick: enterFullscreen,
               className: 'px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs flex items-center gap-1.5 animate-pulse'
-            },
-              h(LucideIcon, { name: 'Maximize2', className: 'w-3.5 h-3.5' }),
-              h('span', null, 'Aktifkan Layar Penuh')
-            ),
-            h('div', {
-              className: 'px-3 py-1.5 rounded-xl font-extrabold text-xs flex items-center gap-1.5 ' + (violations > 0 ? 'bg-rose-600 text-white' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30')
-            },
+            }, h(LucideIcon, { name: 'Maximize2', className: 'w-3.5 h-3.5' }), h('span', null, 'Aktifkan Layar Penuh')),
+            h('div', { className: 'px-3 py-1.5 rounded-xl font-extrabold text-xs flex items-center gap-1.5 ' + (violations > 0 ? 'bg-rose-600 text-white' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30') },
               h(LucideIcon, { name: 'ShieldAlert', className: 'w-3.5 h-3.5' }),
               h('span', null, 'Pelanggaran: ' + violations + '/3')
             ),
@@ -481,9 +494,7 @@
               ),
               h('div', { className: 'flex items-center gap-1 bg-slate-100 p-1 rounded-xl' },
                 [['sm', 'A-'], ['base', 'A'], ['lg', 'A+']].map(([sz, lbl]) => h('button', {
-                  key: sz,
-                  type: 'button',
-                  onClick: () => setFontSize(sz),
+                  key: sz, type: 'button', onClick: () => setFontSize(sz),
                   className: 'px-2.5 py-1 rounded-lg text-xs font-black ' + (fontSize === sz ? 'bg-white shadow text-slate-900' : 'text-slate-500')
                 }, lbl))
               )
@@ -493,9 +504,7 @@
               Object.entries(currentQuestion.options || {}).map(([key, val]) => {
                 const selected = answers[currentQuestion.id] === key;
                 return h('button', {
-                  key,
-                  type: 'button',
-                  onClick: () => setAnswers((p) => ({ ...p, [currentQuestion.id]: key })),
+                  key, type: 'button', onClick: () => setAnswers((p) => ({ ...p, [currentQuestion.id]: key })),
                   className: 'w-full text-left p-3.5 rounded-2xl border transition flex items-center gap-3 ' + (selected ? 'bg-indigo-600 border-indigo-700 text-white shadow' : 'bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-800')
                 },
                   h('span', { className: 'w-7 h-7 rounded-xl flex items-center justify-center font-black text-xs shrink-0 ' + (selected ? 'bg-white text-indigo-700' : 'bg-white border border-slate-300') }, key),
@@ -509,8 +518,7 @@
                 const arr = Array.isArray(answers[currentQuestion.id]) ? answers[currentQuestion.id] : [];
                 const checked = arr.includes(key);
                 return h('button', {
-                  key,
-                  type: 'button',
+                  key, type: 'button',
                   onClick: () => {
                     const nextArr = checked ? arr.filter((x) => x !== key) : [...arr, key];
                     setAnswers((p) => ({ ...p, [currentQuestion.id]: nextArr }));
@@ -525,11 +533,7 @@
             currentQuestion.type === 'BS' && h('div', { className: 'overflow-x-auto border border-slate-200 rounded-2xl' },
               h('table', { className: 'w-full text-xs text-left' },
                 h('thead', { className: 'bg-slate-100 font-extrabold text-slate-700' },
-                  h('tr', null,
-                    h('th', { className: 'p-3' }, 'Pernyataan'),
-                    h('th', { className: 'p-3 text-center w-24' }, 'Benar'),
-                    h('th', { className: 'p-3 text-center w-24' }, 'Salah')
-                  )
+                  h('tr', null, h('th', { className: 'p-3' }, 'Pernyataan'), h('th', { className: 'p-3 text-center w-24' }, 'Benar'), h('th', { className: 'p-3 text-center w-24' }, 'Salah'))
                 ),
                 h('tbody', { className: 'divide-y divide-slate-100' },
                   (currentQuestion.statements || []).map((st, sIdx) => {
@@ -537,18 +541,10 @@
                     return h('tr', { key: sIdx },
                       h('td', { className: 'p-3 font-semibold text-slate-800' }, st.text),
                       h('td', { className: 'p-3 text-center' },
-                        h('button', {
-                          type: 'button',
-                          onClick: () => setAnswers((p) => ({ ...p, [currentQuestion.id]: { ...obj, [sIdx]: 'B' } })),
-                          className: 'px-3 py-1.5 rounded-lg font-black ' + (obj[sIdx] === 'B' ? 'bg-emerald-600 text-white' : 'bg-slate-100 text-slate-600')
-                        }, 'Benar')
+                        h('button', { type: 'button', onClick: () => setAnswers((p) => ({ ...p, [currentQuestion.id]: { ...obj, [sIdx]: 'B' } })), className: 'px-3 py-1.5 rounded-lg font-black ' + (obj[sIdx] === 'B' ? 'bg-emerald-600 text-white' : 'bg-slate-100 text-slate-600') }, 'Benar')
                       ),
                       h('td', { className: 'p-3 text-center' },
-                        h('button', {
-                          type: 'button',
-                          onClick: () => setAnswers((p) => ({ ...p, [currentQuestion.id]: { ...obj, [sIdx]: 'S' } })),
-                          className: 'px-3 py-1.5 rounded-lg font-black ' + (obj[sIdx] === 'S' ? 'bg-rose-600 text-white' : 'bg-slate-100 text-slate-600')
-                        }, 'Salah')
+                        h('button', { type: 'button', onClick: () => setAnswers((p) => ({ ...p, [currentQuestion.id]: { ...obj, [sIdx]: 'S' } })), className: 'px-3 py-1.5 rounded-lg font-black ' + (obj[sIdx] === 'S' ? 'bg-rose-600 text-white' : 'bg-slate-100 text-slate-600') }, 'Salah')
                       )
                     );
                   })
@@ -563,40 +559,15 @@
               className: 'w-full p-4 rounded-2xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 text-xs sm:text-sm font-semibold'
             }),
             h('div', { className: 'flex flex-wrap items-center justify-between gap-2 pt-4 border-t border-slate-100' },
-              h('button', {
-                type: 'button',
-                disabled: currentIndex === 0,
-                onClick: () => setCurrentIndex((i) => Math.max(0, i - 1)),
-                className: 'px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 disabled:opacity-40 text-slate-800 font-extrabold text-xs flex items-center gap-1.5'
-              },
-                h(LucideIcon, { name: 'ChevronLeft', className: 'w-4 h-4' }),
-                h('span', null, 'Sebelumnya')
+              h('button', { type: 'button', disabled: currentIndex === 0, onClick: () => setCurrentIndex((i) => Math.max(0, i - 1)), className: 'px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 disabled:opacity-40 text-slate-800 font-extrabold text-xs flex items-center gap-1.5' },
+                h(LucideIcon, { name: 'ChevronLeft', className: 'w-4 h-4' }), h('span', null, 'Sebelumnya')
               ),
-              h('button', {
-                type: 'button',
-                onClick: () => setDoubtful((p) => ({ ...p, [currentQuestion.id]: !p[currentQuestion.id] })),
-                className: 'px-4 py-2.5 rounded-xl font-extrabold text-xs flex items-center gap-1.5 ' + (doubtful[currentQuestion.id] ? 'bg-amber-500 text-slate-950' : 'bg-amber-50 text-amber-800 border border-amber-200')
-              },
-                h(LucideIcon, { name: 'Flag', className: 'w-3.5 h-3.5' }),
-                h('span', null, 'Ragu-Ragu')
+              h('button', { type: 'button', onClick: () => setDoubtful((p) => ({ ...p, [currentQuestion.id]: !p[currentQuestion.id] })), className: 'px-4 py-2.5 rounded-xl font-extrabold text-xs flex items-center gap-1.5 ' + (doubtful[currentQuestion.id] ? 'bg-amber-500 text-slate-950' : 'bg-amber-50 text-amber-800 border border-amber-200') },
+                h(LucideIcon, { name: 'Flag', className: 'w-3.5 h-3.5' }), h('span', null, 'Ragu-Ragu')
               ),
               currentIndex < questions.length - 1
-                ? h('button', {
-                    type: 'button',
-                    onClick: () => setCurrentIndex((i) => i + 1),
-                    className: 'px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs flex items-center gap-1.5'
-                  },
-                    h('span', null, 'Selanjutnya'),
-                    h(LucideIcon, { name: 'ChevronRight', className: 'w-4 h-4' })
-                  )
-                : h('button', {
-                    type: 'button',
-                    onClick: () => setShowConfirmFinish(true),
-                    className: 'px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs flex items-center gap-1.5 shadow'
-                  },
-                    h(LucideIcon, { name: 'CheckCircle2', className: 'w-4 h-4' }),
-                    h('span', null, 'Selesai Ujian')
-                  )
+                ? h('button', { type: 'button', onClick: () => setCurrentIndex((i) => i + 1), className: 'px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs flex items-center gap-1.5' }, h('span', null, 'Selanjutnya'), h(LucideIcon, { name: 'ChevronRight', className: 'w-4 h-4' }))
+                : h('button', { type: 'button', onClick: () => setShowConfirmFinish(true), className: 'px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs flex items-center gap-1.5 shadow' }, h(LucideIcon, { name: 'CheckCircle2', className: 'w-4 h-4' }), h('span', null, 'Selesai Ujian'))
             )
           ),
           h('div', { className: 'lg:col-span-4 bg-white rounded-3xl border border-slate-200 p-5 shadow-sm space-y-4' },
@@ -614,25 +585,17 @@
                 if (isDoubt) btnStyle = 'bg-amber-400 text-slate-950 border-amber-500';
                 else if (isAnswered) btnStyle = 'bg-emerald-600 text-white border-emerald-700';
                 return h('button', {
-                  key: q.id,
-                  type: 'button',
-                  onClick: () => setCurrentIndex(idx),
+                  key: q.id, type: 'button', onClick: () => setCurrentIndex(idx),
                   className: 'h-10 rounded-xl border font-black text-xs transition ' + btnStyle + (isCurrent ? ' ring-2 ring-slate-950 ring-offset-2' : '')
                 }, idx + 1);
               })
             ),
-            h('button', {
-              type: 'button',
-              onClick: () => setShowConfirmFinish(true),
-              className: 'w-full py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs shadow'
-            }, 'KUMPULKAN JAWABAN SEKARANG')
+            h('button', { type: 'button', onClick: () => setShowConfirmFinish(true), className: 'w-full py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs shadow' }, 'KUMPULKAN JAWABAN SEKARANG')
           )
         ),
         warningModal && h('div', { className: 'fixed inset-0 z-50 bg-rose-950/85 backdrop-blur-sm flex items-center justify-center p-4' },
           h('div', { className: 'bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border-2 border-rose-600 space-y-4 text-center' },
-            h('div', { className: 'w-14 h-14 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center mx-auto' },
-              h(LucideIcon, { name: 'ShieldAlert', className: 'w-8 h-8' })
-            ),
+            h('div', { className: 'w-14 h-14 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center mx-auto' }, h(LucideIcon, { name: 'ShieldAlert', className: 'w-8 h-8' })),
             h('div', { className: 'space-y-1' },
               h('span', { className: 'px-3 py-1 rounded-full bg-rose-600 text-white font-black text-xs' }, 'PERINGATAN ANTI-CURANG (' + warningModal.count + '/3)'),
               h('h3', { className: 'text-lg font-black text-slate-900 pt-1' }, 'Aktivitas Mencurigakan Terdeteksi!'),
@@ -641,25 +604,15 @@
             h('div', { className: 'p-3 rounded-2xl bg-rose-50 border border-rose-200 text-[11px] font-bold text-rose-800' },
               'Jika pelanggaran mencapai 3 kali, ujian akan langsung dihentikan TANPA mengirim jawaban dan akun Anda otomatis ditahan ke Proktor!'
             ),
-            h('button', {
-              type: 'button',
-              onClick: () => { setWarningModal(null); enterFullscreen(); },
-              className: 'w-full py-3 rounded-2xl bg-rose-600 hover:bg-rose-700 text-white font-black text-xs'
-            }, 'SAYA MENGERTI & KEMBALI KE LAYAR PENUH')
+            h('button', { type: 'button', onClick: () => { setWarningModal(null); enterFullscreen(); }, className: 'w-full py-3 rounded-2xl bg-rose-600 hover:bg-rose-700 text-white font-black text-xs' }, 'SAYA MENGERTI & KEMBALI KE LAYAR PENUH')
           )
         ),
         showConfirmFinish && h('div', { className: 'fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4' },
           h('div', { className: 'bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4' },
             h('h3', { className: 'text-base font-black text-slate-900' }, 'Konfirmasi Pengumpulan Jawaban'),
-            h('p', { className: 'text-xs text-slate-600 leading-relaxed' },
-              'Anda telah menjawab ', h('strong', null, answeredCount), ' dari ', h('strong', null, questions.length), ' soal. Setelah dikirim, jawaban tidak dapat diubah kembali.'
-            ),
+            h('p', { className: 'text-xs text-slate-600 leading-relaxed' }, 'Anda telah menjawab ', h('strong', null, answeredCount), ' dari ', h('strong', null, questions.length), ' soal. Setelah dikirim, jawaban tidak dapat diubah kembali.'),
             h('div', { className: 'flex justify-end gap-2 pt-2' },
-              h('button', {
-                type: 'button',
-                onClick: () => setShowConfirmFinish(false),
-                className: 'px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-xs font-extrabold'
-              }, 'Periksa Lagi'),
+              h('button', { type: 'button', onClick: () => setShowConfirmFinish(false), className: 'px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-xs font-extrabold' }, 'Periksa Lagi'),
               h('button', {
                 type: 'button',
                 onClick: () => {
@@ -675,12 +628,14 @@
     }
 
     // ========================================================================
-    // 3. DASHBOARD GURU / PROKTOR / ADMIN LENGKAP (100% SAMA DENGAN PREVIEW)
+    // 3. DASHBOARD GURU / PROKTOR / ADMIN + KONEKTOR CLOUD SUPABASE
     // ========================================================================
     function StaffDashboardHtml({
       user, onLogout, students, setStudents, staffAccounts, setStaffAccounts,
       exams, setExams, questions, setQuestions, results, setResults,
-      examToken, tokenSecondsLeft, onRotateToken, onSaveManualToken, showToast
+      examToken, tokenSecondsLeft, onRotateToken, onSaveManualToken,
+      supabaseConfig, supabaseConnected, onSaveSupabaseConfig, onPushAllToSupabase, onPullAllFromSupabase,
+      showToast
     }) {
       const [sidebarOpen, setSidebarOpen] = useState(true);
       const [activeTab, setActiveTab] = useState('dashboard');
@@ -688,6 +643,10 @@
       // Dashboard & Token
       const [manualTokenInput, setManualTokenInput] = useState(examToken);
       useEffect(() => { setManualTokenInput(examToken); }, [examToken]);
+
+      // Supabase Config Inputs
+      const [sbUrlInput, setSbUrlInput] = useState(supabaseConfig.url || '');
+      const [sbKeyInput, setSbKeyInput] = useState(supabaseConfig.anonKey || '');
 
       // Jadwal Ujian
       const [exSubject, setExSubject] = useState('');
@@ -813,7 +772,6 @@
       const activeOptKeys = hasOptE ? ['A','B','C','D','E'] : ['A','B','C','D'];
 
       return h('div', { className: 'min-h-screen flex bg-slate-100' },
-        // Sidebar Garis Tiga
         sidebarOpen && h('aside', { className: 'w-64 bg-slate-950 text-white flex flex-col justify-between p-4 shrink-0 border-r border-slate-800' },
           h('div', { className: 'space-y-6' },
             h('div', { className: 'flex items-center justify-between px-2 pt-1' },
@@ -821,24 +779,15 @@
                 h('span', { className: 'text-[10px] font-black tracking-widest text-amber-400 uppercase block' }, 'K-CBT SYSTEM'),
                 h('span', { className: 'text-sm font-black text-white' }, SCHOOL_NAME)
               ),
-              h('button', {
-                type: 'button',
-                onClick: () => setSidebarOpen(false),
-                className: 'p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-slate-300 lg:hidden'
-              }, h(LucideIcon, { name: 'X', className: 'w-4 h-4' }))
+              h('button', { type: 'button', onClick: () => setSidebarOpen(false), className: 'p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-slate-300 lg:hidden' }, h(LucideIcon, { name: 'X', className: 'w-4 h-4' }))
             ),
             h('nav', { className: 'space-y-1' },
               navItems.map((item) => {
                 const active = activeTab === item.id;
                 return h('button', {
-                  key: item.id,
-                  type: 'button',
-                  onClick: () => setActiveTab(item.id),
+                  key: item.id, type: 'button', onClick: () => setActiveTab(item.id),
                   className: 'w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-extrabold transition ' + (active ? 'bg-amber-500 text-slate-950 shadow' : 'text-slate-300 hover:bg-white/10 hover:text-white')
-                },
-                  h(LucideIcon, { name: item.icon, className: 'w-4 h-4' }),
-                  h('span', { className: 'truncate' }, item.label)
-                );
+                }, h(LucideIcon, { name: item.icon, className: 'w-4 h-4' }), h('span', { className: 'truncate' }, item.label));
               })
             )
           ),
@@ -847,45 +796,37 @@
               h('div', { className: 'font-black text-white truncate' }, user.name),
               h('div', { className: 'text-[10px] uppercase font-extrabold text-amber-400' }, user.role)
             ),
-            h('button', {
-              type: 'button',
-              onClick: onLogout,
-              className: 'w-full py-2.5 px-3 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-extrabold text-xs flex items-center justify-center gap-2'
-            },
-              h(LucideIcon, { name: 'LogOut', className: 'w-4 h-4' }),
-              h('span', null, 'Keluar / Logout')
+            h('button', { type: 'button', onClick: onLogout, className: 'w-full py-2.5 px-3 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-extrabold text-xs flex items-center justify-center gap-2' },
+              h(LucideIcon, { name: 'LogOut', className: 'w-4 h-4' }), h('span', null, 'Keluar / Logout')
             )
           )
         ),
 
-        // Area Konten Utama
         h('div', { className: 'flex-1 flex flex-col min-w-0' },
           h('header', { className: 'bg-white border-b border-slate-200 px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-3 sticky top-0 z-30' },
             h('div', { className: 'flex items-center gap-3' },
-              h('button', {
-                type: 'button',
-                onClick: () => setSidebarOpen((p) => !p),
-                className: 'p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white transition',
-                title: 'Tampilkan / Sembunyikan Sidebar'
-              }, h(LucideIcon, { name: 'Menu', className: 'w-4 h-4' })),
+              h('button', { type: 'button', onClick: () => setSidebarOpen((p) => !p), className: 'p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white transition' }, h(LucideIcon, { name: 'Menu', className: 'w-4 h-4' })),
               h('div', null,
                 h('h1', { className: 'text-sm sm:text-base font-black text-slate-900' }, navItems.find((n) => n.id === activeTab)?.label),
                 h('p', { className: 'text-[11px] text-slate-500 hidden sm:block' }, 'Panel Pengelola Ujian Berbasis Komputer — ' + SCHOOL_NAME)
               )
             ),
             h('div', { className: 'flex flex-wrap items-center gap-2' },
+              h('button', {
+                type: 'button',
+                onClick: () => setActiveTab('schema'),
+                className: 'px-3 py-1.5 rounded-xl border text-[11px] font-extrabold flex items-center gap-1.5 ' + (supabaseConnected ? 'bg-emerald-50 border-emerald-300 text-emerald-800' : 'bg-slate-100 border-slate-300 text-slate-700')
+              },
+                h('span', { className: 'w-2 h-2 rounded-full ' + (supabaseConnected ? 'bg-emerald-500' : 'bg-slate-400') }),
+                h('span', null, supabaseConnected ? 'Supabase: Terhubung' : 'Mode Lokal (Hubungkan Supabase)')
+              ),
               h('div', { className: 'px-3 py-1.5 rounded-xl bg-amber-50 border border-amber-300 flex items-center gap-2' },
                 h('span', { className: 'text-[11px] font-bold text-amber-900' }, 'Token:'),
                 h('span', { className: 'font-mono font-black text-xs text-slate-950 tracking-widest' }, examToken),
                 h('span', { className: 'px-2 py-0.5 rounded-md bg-amber-500 text-slate-950 font-mono font-black text-[10px]' }, mins + ':' + secs)
               ),
-              h('button', {
-                type: 'button',
-                onClick: onLogout,
-                className: 'px-3 py-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 font-extrabold text-xs flex items-center gap-1'
-              },
-                h(LucideIcon, { name: 'LogOut', className: 'w-3.5 h-3.5' }),
-                h('span', null, 'Logout')
+              h('button', { type: 'button', onClick: onLogout, className: 'px-3 py-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 font-extrabold text-xs flex items-center gap-1' },
+                h(LucideIcon, { name: 'LogOut', className: 'w-3.5 h-3.5' }), h('span', null, 'Logout')
               )
             )
           ),
@@ -929,25 +870,10 @@
                 h('div', { className: 'flex flex-wrap items-center gap-3' },
                   h('div', { className: 'px-5 py-3 rounded-2xl bg-white/10 border border-white/15 font-mono text-2xl font-black tracking-widest text-amber-400' }, examToken),
                   h('div', { className: 'flex items-center gap-2' },
-                    h('input', {
-                      type: 'text',
-                      maxLength: 8,
-                      value: manualTokenInput,
-                      onChange: (e) => setManualTokenInput(e.target.value.toUpperCase()),
-                      className: 'w-28 px-3 py-2.5 rounded-xl bg-white text-slate-900 font-mono text-xs font-black uppercase'
-                    }),
-                    h('button', {
-                      type: 'button',
-                      onClick: () => onSaveManualToken(manualTokenInput),
-                      className: 'px-3.5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs'
-                    }, 'Simpan'),
-                    h('button', {
-                      type: 'button',
-                      onClick: onRotateToken,
-                      className: 'px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs flex items-center gap-1.5'
-                    },
-                      h(LucideIcon, { name: 'RefreshCw', className: 'w-3.5 h-3.5' }),
-                      h('span', null, 'Acak Token')
+                    h('input', { type: 'text', maxLength: 8, value: manualTokenInput, onChange: (e) => setManualTokenInput(e.target.value.toUpperCase()), className: 'w-28 px-3 py-2.5 rounded-xl bg-white text-slate-900 font-mono text-xs font-black uppercase' }),
+                    h('button', { type: 'button', onClick: () => onSaveManualToken(manualTokenInput), className: 'px-3.5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs' }, 'Simpan'),
+                    h('button', { type: 'button', onClick: onRotateToken, className: 'px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs flex items-center gap-1.5' },
+                      h(LucideIcon, { name: 'RefreshCw', className: 'w-3.5 h-3.5' }), h('span', null, 'Acak Token')
                     )
                   )
                 )
@@ -965,10 +891,7 @@
                       'Tidak ada peserta yang sedang ditahan. Semua akun siswa dalam keadaan aktif.'
                     )
                   : h('div', { className: 'space-y-2.5' },
-                      suspendedStudents.map((st) => h('div', {
-                        key: st.id,
-                        className: 'p-4 rounded-2xl bg-rose-50 border border-rose-200 flex flex-wrap items-center justify-between gap-3'
-                      },
+                      suspendedStudents.map((st) => h('div', { key: st.id, className: 'p-4 rounded-2xl bg-rose-50 border border-rose-200 flex flex-wrap items-center justify-between gap-3' },
                         h('div', { className: 'space-y-0.5' },
                           h('div', { className: 'flex items-center gap-2' },
                             h('span', { className: 'font-black text-xs text-rose-950' }, st.name),
@@ -983,10 +906,7 @@
                             showToast('Akun ' + st.name + ' berhasil diaktifkan kembali!', 'success');
                           },
                           className: 'px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs flex items-center gap-1.5 shadow'
-                        },
-                          h(LucideIcon, { name: 'CheckCircle2', className: 'w-3.5 h-3.5' }),
-                          h('span', null, 'Aktifkan Akun')
-                        )
+                        }, h(LucideIcon, { name: 'CheckCircle2', className: 'w-3.5 h-3.5' }), h('span', null, 'Aktifkan Akun'))
                       ))
                     )
               )
@@ -999,13 +919,9 @@
                   e.preventDefault();
                   if (!exSubject.trim()) return showToast('Nama Mata Pelajaran wajib diisi.', 'error');
                   setExams((prev) => [{
-                    id: 'ex-' + Date.now(),
-                    subject: exSubject.trim(),
-                    grade: exGrade,
-                    durationMinutes: Number(exDuration) || 60,
-                    isActive: true,
-                    shuffleQuestions: exShuffleQ,
-                    shuffleOptions: exShuffleOpt,
+                    id: 'ex-' + Date.now(), subject: exSubject.trim(), grade: exGrade,
+                    durationMinutes: Number(exDuration) || 60, isActive: true,
+                    shuffleQuestions: exShuffleQ, shuffleOptions: exShuffleOpt,
                     date: new Date().toISOString().slice(0, 10)
                   }, ...prev]);
                   setExSubject('');
@@ -1017,38 +933,22 @@
                 h('div', { className: 'grid sm:grid-cols-2 lg:grid-cols-4 gap-3' },
                   h('input', { value: exSubject, onChange: (e) => setExSubject(e.target.value), placeholder: 'Nama Mata Pelajaran', className: 'px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs font-bold' }),
                   h('select', { value: exGrade, onChange: (e) => setExGrade(e.target.value), className: 'px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs font-extrabold bg-white' },
-                    h('option', { value: '7' }, 'Tingkat Kelas 7'),
-                    h('option', { value: '8' }, 'Tingkat Kelas 8'),
-                    h('option', { value: '9' }, 'Tingkat Kelas 9')
+                    h('option', { value: '7' }, 'Tingkat Kelas 7'), h('option', { value: '8' }, 'Tingkat Kelas 8'), h('option', { value: '9' }, 'Tingkat Kelas 9')
                   ),
                   h('input', { type: 'number', min: 10, max: 180, value: exDuration, onChange: (e) => setExDuration(e.target.value), placeholder: 'Durasi (Menit)', className: 'px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs font-bold' }),
                   h('button', { type: 'submit', className: 'px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs flex items-center justify-center gap-1.5' },
-                    h(LucideIcon, { name: 'Plus', className: 'w-4 h-4' }),
-                    h('span', null, 'Simpan Jadwal')
+                    h(LucideIcon, { name: 'Plus', className: 'w-4 h-4' }), h('span', null, 'Simpan Jadwal')
                   )
                 ),
                 h('div', { className: 'flex flex-wrap gap-4 text-xs font-bold text-slate-700' },
-                  h('label', { className: 'inline-flex items-center gap-2 cursor-pointer' },
-                    h('input', { type: 'checkbox', checked: exShuffleQ, onChange: (e) => setExShuffleQ(e.target.checked) }),
-                    h('span', null, 'Acak Urutan Soal')
-                  ),
-                  h('label', { className: 'inline-flex items-center gap-2 cursor-pointer' },
-                    h('input', { type: 'checkbox', checked: exShuffleOpt, onChange: (e) => setExShuffleOpt(e.target.checked) }),
-                    h('span', null, 'Acak Opsi Jawaban')
-                  )
+                  h('label', { className: 'inline-flex items-center gap-2 cursor-pointer' }, h('input', { type: 'checkbox', checked: exShuffleQ, onChange: (e) => setExShuffleQ(e.target.checked) }), h('span', null, 'Acak Urutan Soal')),
+                  h('label', { className: 'inline-flex items-center gap-2 cursor-pointer' }, h('input', { type: 'checkbox', checked: exShuffleOpt, onChange: (e) => setExShuffleOpt(e.target.checked) }), h('span', null, 'Acak Opsi Jawaban'))
                 )
               ),
               h('div', { className: 'bg-white rounded-3xl border border-slate-200 p-6 shadow-sm overflow-x-auto' },
                 h('table', { className: 'w-full text-left text-xs' },
                   h('thead', { className: 'bg-slate-100 font-extrabold text-slate-700' },
-                    h('tr', null,
-                      h('th', { className: 'p-3 rounded-l-xl' }, 'Mata Pelajaran'),
-                      h('th', { className: 'p-3' }, 'Kelas'),
-                      h('th', { className: 'p-3' }, 'Durasi'),
-                      h('th', { className: 'p-3' }, 'Acak Soal / Opsi'),
-                      h('th', { className: 'p-3' }, 'Status'),
-                      h('th', { className: 'p-3 rounded-r-xl text-right' }, 'Aksi')
-                    )
+                    h('tr', null, h('th', { className: 'p-3 rounded-l-xl' }, 'Mata Pelajaran'), h('th', { className: 'p-3' }, 'Kelas'), h('th', { className: 'p-3' }, 'Durasi'), h('th', { className: 'p-3' }, 'Acak Soal / Opsi'), h('th', { className: 'p-3' }, 'Status'), h('th', { className: 'p-3 rounded-r-xl text-right' }, 'Aksi'))
                   ),
                   h('tbody', { className: 'divide-y divide-slate-100' },
                     exams.map((ex) => h('tr', { key: ex.id },
@@ -1057,18 +957,10 @@
                       h('td', { className: 'p-3' }, ex.durationMinutes + ' Menit'),
                       h('td', { className: 'p-3' }, (ex.shuffleQuestions ? 'Acak Soal' : 'Urut') + ' • ' + (ex.shuffleOptions ? 'Acak Opsi' : 'Urut')),
                       h('td', { className: 'p-3' },
-                        h('button', {
-                          type: 'button',
-                          onClick: () => setExams((prev) => prev.map((x) => x.id === ex.id ? { ...x, isActive: !x.isActive } : x)),
-                          className: 'px-3 py-1 rounded-full font-extrabold ' + (ex.isActive ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-200 text-slate-600')
-                        }, ex.isActive ? 'Aktif' : 'Nonaktif')
+                        h('button', { type: 'button', onClick: () => setExams((prev) => prev.map((x) => x.id === ex.id ? { ...x, isActive: !x.isActive } : x)), className: 'px-3 py-1 rounded-full font-extrabold ' + (ex.isActive ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-200 text-slate-600') }, ex.isActive ? 'Aktif' : 'Nonaktif')
                       ),
                       h('td', { className: 'p-3 text-right' },
-                        h('button', {
-                          type: 'button',
-                          onClick: () => setExams((prev) => prev.filter((x) => x.id !== ex.id)),
-                          className: 'px-3 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 font-extrabold'
-                        }, 'Hapus')
+                        h('button', { type: 'button', onClick: () => setExams((prev) => prev.filter((x) => x.id !== ex.id)), className: 'px-3 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 font-extrabold' }, 'Hapus')
                       )
                     ))
                   )
@@ -1076,7 +968,7 @@
               )
             ),
 
-            // TAB 3: BANK SOAL (A-D + OPSI E, EDIT & HAPUS, IMPOR/UNDUH WORD)
+            // TAB 3: BANK SOAL
             activeTab === 'questions' && h('div', { className: 'space-y-6' },
               h('form', {
                 onSubmit: (e) => {
@@ -1085,30 +977,15 @@
                   const builtOpts = { A: optA, B: optB, C: optC, D: optD };
                   if (hasOptE) builtOpts.E = optE;
                   const payload = {
-                    id: editingQId || ('q-' + Date.now()),
-                    subject: qSubject.trim(),
-                    grade: qGrade,
-                    type: qType,
-                    weight: Number(qWeight) || 10,
-                    prompt: qPrompt.trim(),
-                    options: builtOpts,
-                    hasOptionE: hasOptE,
+                    id: editingQId || ('q-' + Date.now()), subject: qSubject.trim(), grade: qGrade, type: qType,
+                    weight: Number(qWeight) || 10, prompt: qPrompt.trim(), options: builtOpts, hasOptionE: hasOptE,
                     correctOption: !hasOptE && correctOpt === 'E' ? 'A' : correctOpt,
                     correctOptions: !hasOptE ? correctOpts.filter((x) => x !== 'E') : correctOpts,
-                    statements: stmts,
-                    correctShortAnswer: shortAns,
-                    essayRubric: rubric
+                    statements: stmts, correctShortAnswer: shortAns, essayRubric: rubric
                   };
-                  if (editingQId) {
-                    setQuestions((prev) => prev.map((q) => q.id === editingQId ? payload : q));
-                    showToast('Perubahan butir soal berhasil disimpan!', 'success');
-                  } else {
-                    setQuestions((prev) => [payload, ...prev]);
-                    showToast('Butir soal baru berhasil ditambahkan!', 'success');
-                  }
-                  setQFilterSubject(payload.subject);
-                  setQFilterGrade(payload.grade);
-                  resetQForm();
+                  if (editingQId) { setQuestions((prev) => prev.map((q) => q.id === editingQId ? payload : q)); showToast('Perubahan butir soal berhasil disimpan!', 'success'); }
+                  else { setQuestions((prev) => [payload, ...prev]); showToast('Butir soal baru berhasil ditambahkan!', 'success'); }
+                  setQFilterSubject(payload.subject); setQFilterGrade(payload.grade); resetQForm();
                 },
                 className: 'bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-4'
               },
@@ -1129,32 +1006,21 @@
                         showToast('Template soal Word (.docx) berhasil diunduh!', 'success');
                       },
                       className: 'px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-xs flex items-center gap-1.5'
-                    },
-                      h(LucideIcon, { name: 'Download', className: 'w-3.5 h-3.5' }),
-                      h('span', null, 'Unduh Template (.docx)')
-                    ),
+                    }, h(LucideIcon, { name: 'Download', className: 'w-3.5 h-3.5' }), h('span', null, 'Unduh Template (.docx)')),
                     h('label', { className: 'px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs flex items-center gap-1.5 cursor-pointer' },
-                      h(LucideIcon, { name: 'Upload', className: 'w-3.5 h-3.5' }),
-                      h('span', null, 'Impor Soal (.docx)'),
+                      h(LucideIcon, { name: 'Upload', className: 'w-3.5 h-3.5' }), h('span', null, 'Impor Soal (.docx)'),
                       h('input', {
-                        type: 'file',
-                        accept: '.doc,.docx,.txt',
+                        type: 'file', accept: '.doc,.docx,.txt',
                         onChange: (e) => {
                           const file = e.target.files?.[0];
                           if (!file) return;
                           setQuestions((prev) => [{
-                            id: 'q-imp-' + Date.now(),
-                            subject: qFilterSubject,
-                            grade: qFilterGrade,
-                            type: 'PG',
-                            weight: 20,
+                            id: 'q-imp-' + Date.now(), subject: qFilterSubject, grade: qFilterGrade, type: 'PG', weight: 20,
                             prompt: '[Hasil Impor ' + file.name + '] Contoh butir soal hasil unggah dokumen — silakan klik Edit untuk menyesuaikan teks soal & kunci jawaban.',
                             options: { A: 'Pilihan Jawaban A', B: 'Pilihan Jawaban B', C: 'Pilihan Jawaban C', D: 'Pilihan Jawaban D' },
-                            hasOptionE: false,
-                            correctOption: 'A'
+                            hasOptionE: false, correctOption: 'A'
                           }, ...prev]);
-                          showToast('Soal dari ' + file.name + ' berhasil diimpor!', 'success');
-                          e.target.value = '';
+                          showToast('Soal dari ' + file.name + ' berhasil diimpor!', 'success'); e.target.value = '';
                         },
                         className: 'hidden'
                       })
@@ -1163,17 +1029,9 @@
                 ),
                 h('div', { className: 'grid sm:grid-cols-2 lg:grid-cols-4 gap-3' },
                   h('input', { value: qSubject, onChange: (e) => setQSubject(e.target.value), placeholder: 'Nama Mata Pelajaran', className: 'px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs font-bold' }),
-                  h('select', { value: qGrade, onChange: (e) => setQGrade(e.target.value), className: 'px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs font-extrabold bg-white' },
-                    h('option', { value: '7' }, 'Kelas 7'),
-                    h('option', { value: '8' }, 'Kelas 8'),
-                    h('option', { value: '9' }, 'Kelas 9')
-                  ),
+                  h('select', { value: qGrade, onChange: (e) => setQGrade(e.target.value), className: 'px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs font-extrabold bg-white' }, h('option', { value: '7' }, 'Kelas 7'), h('option', { value: '8' }, 'Kelas 8'), h('option', { value: '9' }, 'Kelas 9')),
                   h('select', { value: qType, onChange: (e) => setQType(e.target.value), className: 'px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs font-extrabold bg-white' },
-                    h('option', { value: 'PG' }, 'Pilihan Ganda (PG)'),
-                    h('option', { value: 'PGK' }, 'PG Kompleks (Multi Jawaban)'),
-                    h('option', { value: 'BS' }, 'Benar / Salah (Pernyataan)'),
-                    h('option', { value: 'ISIAN' }, 'Isian Singkat'),
-                    h('option', { value: 'URAIAN' }, 'Uraian / Esai')
+                    h('option', { value: 'PG' }, 'Pilihan Ganda (PG)'), h('option', { value: 'PGK' }, 'PG Kompleks (Multi Jawaban)'), h('option', { value: 'BS' }, 'Benar / Salah (Pernyataan)'), h('option', { value: 'ISIAN' }, 'Isian Singkat'), h('option', { value: 'URAIAN' }, 'Uraian / Esai')
                   ),
                   h('input', { type: 'number', min: 1, max: 100, value: qWeight, onChange: (e) => setQWeight(e.target.value), placeholder: 'Bobot Poin', className: 'px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs font-bold' })
                 ),
@@ -1183,15 +1041,7 @@
                     h('span', { className: 'text-xs font-black text-slate-800' }, 'Pilihan Jawaban (' + (hasOptE ? 'Opsi A – E' : 'Opsi A – D') + ')'),
                     !hasOptE
                       ? h('button', { type: 'button', onClick: () => setHasOptE(true), className: 'px-3 py-1 rounded-lg bg-indigo-100 hover:bg-indigo-200 text-indigo-800 font-extrabold text-xs' }, '+ Tambah Opsi E')
-                      : h('button', {
-                          type: 'button',
-                          onClick: () => {
-                            setHasOptE(false); setOptE('');
-                            if (correctOpt === 'E') setCorrectOpt('A');
-                            setCorrectOpts((prev) => prev.filter((x) => x !== 'E'));
-                          },
-                          className: 'px-3 py-1 rounded-lg bg-rose-100 hover:bg-rose-200 text-rose-800 font-extrabold text-xs'
-                        }, 'Hapus Opsi E')
+                      : h('button', { type: 'button', onClick: () => { setHasOptE(false); setOptE(''); if (correctOpt === 'E') setCorrectOpt('A'); setCorrectOpts((p) => p.filter((x) => x !== 'E')); }, className: 'px-3 py-1 rounded-lg bg-rose-100 hover:bg-rose-200 text-rose-800 font-extrabold text-xs' }, 'Hapus Opsi E')
                   ),
                   h('div', { className: 'grid sm:grid-cols-2 gap-2.5' },
                     [['A', optA, setOptA], ['B', optB, setOptB], ['C', optC, setOptC], ['D', optD, setOptD], ...(hasOptE ? [['E', optE, setOptE]] : [])].map(([letter, val, setter]) =>
@@ -1204,20 +1054,13 @@
                   qType === 'PG'
                     ? h('div', { className: 'flex items-center gap-2 pt-1' },
                         h('span', { className: 'text-xs font-extrabold text-slate-700' }, 'Kunci Jawaban:'),
-                        activeOptKeys.map((k) => h('button', {
-                          key: k, type: 'button', onClick: () => setCorrectOpt(k),
-                          className: 'w-8 h-8 rounded-lg font-black text-xs ' + (correctOpt === k ? 'bg-emerald-600 text-white' : 'bg-white border border-slate-300 text-slate-700')
-                        }, k))
+                        activeOptKeys.map((k) => h('button', { key: k, type: 'button', onClick: () => setCorrectOpt(k), className: 'w-8 h-8 rounded-lg font-black text-xs ' + (correctOpt === k ? 'bg-emerald-600 text-white' : 'bg-white border border-slate-300 text-slate-700') }, k))
                       )
                     : h('div', { className: 'flex flex-wrap items-center gap-2 pt-1' },
                         h('span', { className: 'text-xs font-extrabold text-slate-700' }, 'Kunci Jawaban Kompleks:'),
                         activeOptKeys.map((k) => {
                           const act = correctOpts.includes(k);
-                          return h('button', {
-                            key: k, type: 'button',
-                            onClick: () => setCorrectOpts((p) => act ? p.filter((x) => x !== k) : [...p, k]),
-                            className: 'w-8 h-8 rounded-lg font-black text-xs ' + (act ? 'bg-emerald-600 text-white' : 'bg-white border border-slate-300 text-slate-700')
-                          }, k);
+                          return h('button', { key: k, type: 'button', onClick: () => setCorrectOpts((p) => act ? p.filter((x) => x !== k) : [...p, k]), className: 'w-8 h-8 rounded-lg font-black text-xs ' + (act ? 'bg-emerald-600 text-white' : 'bg-white border border-slate-300 text-slate-700') }, k);
                         })
                       )
                 ),
@@ -1227,72 +1070,40 @@
                     h('button', { type: 'button', onClick: () => setStmts((p) => [...p, { text: '', answer: 'B' }]), className: 'px-3 py-1 rounded-lg bg-indigo-100 text-indigo-800 font-extrabold text-xs' }, '+ Tambah Pernyataan')
                   ),
                   stmts.map((st, idx) => h('div', { key: idx, className: 'flex items-center gap-2' },
-                    h('input', {
-                      value: st.text,
-                      onChange: (e) => setStmts((p) => p.map((it, i) => i === idx ? { ...it, text: e.target.value } : it)),
-                      placeholder: 'Pernyataan #' + (idx + 1),
-                      className: 'flex-1 px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs font-semibold'
-                    }),
-                    h('select', {
-                      value: st.answer,
-                      onChange: (e) => setStmts((p) => p.map((it, i) => i === idx ? { ...it, answer: e.target.value } : it)),
-                      className: 'px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs font-extrabold'
-                    }, h('option', { value: 'B' }, 'Benar'), h('option', { value: 'S' }, 'Salah'))
+                    h('input', { value: st.text, onChange: (e) => setStmts((p) => p.map((it, i) => i === idx ? { ...it, text: e.target.value } : it)), placeholder: 'Pernyataan #' + (idx + 1), className: 'flex-1 px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs font-semibold' }),
+                    h('select', { value: st.answer, onChange: (e) => setStmts((p) => p.map((it, i) => i === idx ? { ...it, answer: e.target.value } : it)), className: 'px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs font-extrabold' }, h('option', { value: 'B' }, 'Benar'), h('option', { value: 'S' }, 'Salah'))
                   ))
                 ),
                 qType === 'ISIAN' && h('input', { value: shortAns, onChange: (e) => setShortAns(e.target.value), placeholder: 'Kunci Jawaban Singkat (contoh: 56)', className: 'w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs font-bold' }),
                 qType === 'URAIAN' && h('textarea', { rows: 2, value: rubric, onChange: (e) => setRubric(e.target.value), placeholder: 'Pedoman / Rubrik Penilaian Uraian', className: 'w-full p-3 rounded-xl border border-slate-300 text-xs font-semibold' }),
                 h('div', { className: 'flex justify-end' },
                   h('button', { type: 'submit', className: 'px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs flex items-center gap-1.5' },
-                    h(LucideIcon, { name: 'CheckCircle2', className: 'w-4 h-4 text-amber-400' }),
-                    h('span', null, editingQId ? 'Simpan Perubahan Soal' : 'Simpan Butir Soal')
+                    h(LucideIcon, { name: 'CheckCircle2', className: 'w-4 h-4 text-amber-400' }), h('span', null, editingQId ? 'Simpan Perubahan Soal' : 'Simpan Butir Soal')
                   )
                 )
               ),
               h('div', { className: 'bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-4' },
                 h('div', { className: 'flex flex-wrap items-center justify-between gap-3' },
                   h('div', { className: 'flex flex-wrap items-center gap-2' },
-                    h('select', { value: qFilterSubject, onChange: (e) => setQFilterSubject(e.target.value), className: 'px-3.5 py-2 rounded-xl border border-slate-300 text-xs font-extrabold bg-white' },
-                      uniqueSubjects.map((s) => h('option', { key: s, value: s }, s))
-                    ),
-                    h('select', { value: qFilterGrade, onChange: (e) => setQFilterGrade(e.target.value), className: 'px-3.5 py-2 rounded-xl border border-slate-300 text-xs font-extrabold bg-white' },
-                      h('option', { value: '7' }, 'Kelas 7'),
-                      h('option', { value: '8' }, 'Kelas 8'),
-                      h('option', { value: '9' }, 'Kelas 9')
-                    ),
+                    h('select', { value: qFilterSubject, onChange: (e) => setQFilterSubject(e.target.value), className: 'px-3.5 py-2 rounded-xl border border-slate-300 text-xs font-extrabold bg-white' }, uniqueSubjects.map((s) => h('option', { key: s, value: s }, s))),
+                    h('select', { value: qFilterGrade, onChange: (e) => setQFilterGrade(e.target.value), className: 'px-3.5 py-2 rounded-xl border border-slate-300 text-xs font-extrabold bg-white' }, h('option', { value: '7' }, 'Kelas 7'), h('option', { value: '8' }, 'Kelas 8'), h('option', { value: '9' }, 'Kelas 9')),
                     h('span', { className: 'text-xs font-bold text-slate-500' }, '(' + filteredQuestions.length + ' Soal)')
                   ),
                   filteredQuestions.length > 0 && (
                     confirmDelAllQ
                       ? h('div', { className: 'inline-flex items-center gap-1.5' },
-                          h('button', {
-                            type: 'button',
-                            onClick: () => {
-                              setQuestions((p) => p.filter((q) => !(q.subject === qFilterSubject && q.grade === qFilterGrade)));
-                              setConfirmDelAllQ(false);
-                              showToast('Semua soal pada mata pelajaran ini berhasil dihapus.', 'info');
-                            },
-                            className: 'px-3 py-1.5 rounded-xl bg-rose-600 text-white font-extrabold text-xs'
-                          }, 'Ya, Hapus Semua'),
+                          h('button', { type: 'button', onClick: () => { setQuestions((p) => p.filter((q) => !(q.subject === qFilterSubject && q.grade === qFilterGrade))); setConfirmDelAllQ(false); showToast('Semua soal pada mata pelajaran ini berhasil dihapus.', 'info'); }, className: 'px-3 py-1.5 rounded-xl bg-rose-600 text-white font-extrabold text-xs' }, 'Ya, Hapus Semua'),
                           h('button', { type: 'button', onClick: () => setConfirmDelAllQ(false), className: 'px-3 py-1.5 rounded-xl bg-slate-200 text-slate-800 font-extrabold text-xs' }, 'Batal')
                         )
-                      : h('button', {
-                          type: 'button',
-                          onClick: () => setConfirmDelAllQ(true),
-                          className: 'px-3.5 py-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 font-extrabold text-xs flex items-center gap-1.5'
-                        },
-                          h(LucideIcon, { name: 'Trash2', className: 'w-3.5 h-3.5' }),
-                          h('span', null, 'Hapus Semua Soal Mapel Ini')
+                      : h('button', { type: 'button', onClick: () => setConfirmDelAllQ(true), className: 'px-3.5 py-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 font-extrabold text-xs flex items-center gap-1.5' },
+                          h(LucideIcon, { name: 'Trash2', className: 'w-3.5 h-3.5' }), h('span', null, 'Hapus Semua Soal Mapel Ini')
                         )
                   )
                 ),
                 h('div', { className: 'space-y-3' },
                   filteredQuestions.length === 0
                     ? h('div', { className: 'p-6 rounded-2xl bg-slate-50 border border-dashed border-slate-200 text-center text-xs text-slate-500' }, 'Belum ada soal untuk ' + qFilterSubject + ' Kelas ' + qFilterGrade + '.')
-                    : filteredQuestions.map((q, idx) => h('div', {
-                        key: q.id,
-                        className: 'p-4 rounded-2xl border border-slate-200 bg-slate-50/70 flex flex-col sm:flex-row sm:items-start justify-between gap-4'
-                      },
+                    : filteredQuestions.map((q, idx) => h('div', { key: q.id, className: 'p-4 rounded-2xl border border-slate-200 bg-slate-50/70 flex flex-col sm:flex-row sm:items-start justify-between gap-4' },
                         h('div', { className: 'space-y-2 flex-1' },
                           h('div', { className: 'flex flex-wrap items-center gap-2' },
                             h('span', { className: 'px-2.5 py-0.5 rounded-lg bg-slate-900 text-white font-black text-xs' }, '#' + (idx + 1)),
@@ -1303,10 +1114,7 @@
                           q.options && (q.type === 'PG' || q.type === 'PGK') && h('div', { className: 'grid sm:grid-cols-2 gap-1.5 text-[11px]' },
                             Object.entries(q.options).map(([k, v]) => {
                               const isKey = q.type === 'PG' ? q.correctOption === k : (q.correctOptions || []).includes(k);
-                              return h('div', {
-                                key: k,
-                                className: 'px-2.5 py-1 rounded-lg border ' + (isKey ? 'bg-emerald-50 border-emerald-300 text-emerald-900 font-extrabold' : 'bg-white border-slate-200 text-slate-600')
-                              }, k + '. ' + v);
+                              return h('div', { key: k, className: 'px-2.5 py-1 rounded-lg border ' + (isKey ? 'bg-emerald-50 border-emerald-300 text-emerald-900 font-extrabold' : 'bg-white border-slate-200 text-slate-600') }, k + '. ' + v);
                             })
                           )
                         ),
@@ -1320,38 +1128,20 @@
                               setOptA(opts.A || ''); setOptB(opts.B || ''); setOptC(opts.C || ''); setOptD(opts.D || '');
                               const withE = Boolean(q.hasOptionE || (opts.E && opts.E.trim() !== ''));
                               setHasOptE(withE); setOptE(opts.E || '');
-                              setCorrectOpt(q.correctOption || 'A');
-                              setCorrectOpts(Array.isArray(q.correctOptions) ? q.correctOptions : ['A']);
+                              setCorrectOpt(q.correctOption || 'A'); setCorrectOpts(Array.isArray(q.correctOptions) ? q.correctOptions : ['A']);
                               setStmts(Array.isArray(q.statements) && q.statements.length ? q.statements : [{ text: '', answer: 'B' }, { text: '', answer: 'S' }]);
                               setShortAns(q.correctShortAnswer || ''); setRubric(q.essayRubric || '');
                               window.scrollTo({ top: 0, behavior: 'smooth' });
                             },
                             className: 'px-3 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-extrabold text-xs flex items-center gap-1'
-                          },
-                            h(LucideIcon, { name: 'Edit3', className: 'w-3.5 h-3.5' }),
-                            h('span', null, 'Edit')
-                          ),
+                          }, h(LucideIcon, { name: 'Edit3', className: 'w-3.5 h-3.5' }), h('span', null, 'Edit')),
                           confirmDelQId === q.id
                             ? h('div', { className: 'inline-flex items-center gap-1' },
-                                h('button', {
-                                  type: 'button',
-                                  onClick: () => {
-                                    setQuestions((p) => p.filter((it) => it.id !== q.id));
-                                    setConfirmDelQId(null);
-                                    if (editingQId === q.id) resetQForm();
-                                    showToast('Butir soal berhasil dihapus.', 'info');
-                                  },
-                                  className: 'px-2.5 py-1.5 rounded-xl bg-rose-600 text-white font-extrabold text-xs'
-                                }, 'Ya, Hapus'),
+                                h('button', { type: 'button', onClick: () => { setQuestions((p) => p.filter((it) => it.id !== q.id)); setConfirmDelQId(null); if (editingQId === q.id) resetQForm(); showToast('Butir soal berhasil dihapus.', 'info'); }, className: 'px-2.5 py-1.5 rounded-xl bg-rose-600 text-white font-extrabold text-xs' }, 'Ya, Hapus'),
                                 h('button', { type: 'button', onClick: () => setConfirmDelQId(null), className: 'px-2.5 py-1.5 rounded-xl bg-slate-200 text-slate-800 font-extrabold text-xs' }, 'Batal')
                               )
-                            : h('button', {
-                                type: 'button',
-                                onClick: () => setConfirmDelQId(q.id),
-                                className: 'px-3 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 font-extrabold text-xs flex items-center gap-1'
-                              },
-                                h(LucideIcon, { name: 'Trash2', className: 'w-3.5 h-3.5' }),
-                                h('span', null, 'Hapus')
+                            : h('button', { type: 'button', onClick: () => setConfirmDelQId(q.id), className: 'px-3 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 font-extrabold text-xs flex items-center gap-1' },
+                                h(LucideIcon, { name: 'Trash2', className: 'w-3.5 h-3.5' }), h('span', null, 'Hapus')
                               )
                         )
                       ))
@@ -1366,16 +1156,10 @@
                   e.preventDefault();
                   if (!stuNis.trim() || !stuName.trim()) return showToast('NIS/NISN dan Nama Siswa wajib diisi.', 'error');
                   setStudents((prev) => [{
-                    id: 'stu-' + Date.now(),
-                    nis: stuNis.trim(),
-                    name: stuName.trim().toUpperCase(),
-                    className: stuClass,
-                    grade: stuClass.charAt(0),
+                    id: 'stu-' + Date.now(), nis: stuNis.trim(), name: stuName.trim().toUpperCase(),
+                    className: stuClass, grade: stuClass.charAt(0),
                     password: (stuPwd.trim() || genPwd5()).toUpperCase(),
-                    passwordLocked: stuLockNew,
-                    isActive: true,
-                    isAllowed: true,
-                    violations: 0
+                    passwordLocked: stuLockNew, isActive: true, isAllowed: true, violations: 0
                   }, ...prev]);
                   setStuNis(''); setStuName(''); setStuPwd(genPwd5()); setStuLockNew(false);
                   showToast('Data siswa berhasil ditambahkan!', 'success');
@@ -1395,16 +1179,11 @@
                         showToast('Template Excel/CSV diunduh!', 'success');
                       },
                       className: 'px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-xs flex items-center gap-1.5'
-                    },
-                      h(LucideIcon, { name: 'Download', className: 'w-3.5 h-3.5' }),
-                      h('span', null, 'Template Excel (NIS/NISN, Nama)')
-                    ),
+                    }, h(LucideIcon, { name: 'Download', className: 'w-3.5 h-3.5' }), h('span', null, 'Template Excel (NIS/NISN, Nama)')),
                     h('label', { className: 'px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs flex items-center gap-1.5 cursor-pointer' },
-                      h(LucideIcon, { name: 'Upload', className: 'w-3.5 h-3.5' }),
-                      h('span', null, 'Import Excel'),
+                      h(LucideIcon, { name: 'Upload', className: 'w-3.5 h-3.5' }), h('span', null, 'Import Excel'),
                       h('input', {
-                        type: 'file',
-                        accept: '.csv,.txt,.xlsx,.xls',
+                        type: 'file', accept: '.csv,.txt,.xlsx,.xls',
                         onChange: (e) => {
                           const file = e.target.files?.[0];
                           if (!file) return;
@@ -1421,13 +1200,9 @@
                                 imp.push({ id: 'stu-imp-' + Date.now() + '-' + idx, nis: cols[0], name: cols[1].toUpperCase(), className: vc, grade: vc.charAt(0), password: genPwd5(), passwordLocked: false, isActive: true, isAllowed: true, violations: 0 });
                               }
                             });
-                            if (imp.length) {
-                              setStudents((p) => [...imp, ...p]);
-                              showToast('Berhasil mengimpor ' + imp.length + ' data siswa!', 'success');
-                            }
+                            if (imp.length) { setStudents((p) => [...imp, ...p]); showToast('Berhasil mengimpor ' + imp.length + ' data siswa!', 'success'); }
                           };
-                          reader.readAsText(file);
-                          e.target.value = '';
+                          reader.readAsText(file); e.target.value = '';
                         },
                         className: 'hidden'
                       })
@@ -1443,33 +1218,21 @@
                         showToast('Data siswa berhasil diekspor ke Excel/CSV!', 'success');
                       },
                       className: 'px-3 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-800 font-extrabold text-xs flex items-center gap-1.5'
-                    },
-                      h(LucideIcon, { name: 'FileSpreadsheet', className: 'w-3.5 h-3.5' }),
-                      h('span', null, 'Export Excel')
-                    )
+                    }, h(LucideIcon, { name: 'FileSpreadsheet', className: 'w-3.5 h-3.5' }), h('span', null, 'Export Excel'))
                   )
                 ),
                 h('div', { className: 'grid sm:grid-cols-2 lg:grid-cols-4 gap-3' },
                   h('input', { value: stuNis, onChange: (e) => setStuNis(e.target.value), placeholder: 'NIS / NISN', className: 'px-3.5 py-2.5 rounded-xl border border-slate-300 font-mono text-xs font-bold' }),
                   h('input', { value: stuName, onChange: (e) => setStuName(e.target.value), placeholder: 'Nama Lengkap Siswa', className: 'px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs font-bold uppercase' }),
-                  h('select', { value: stuClass, onChange: (e) => setStuClass(e.target.value), className: 'px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs font-extrabold bg-white' },
-                    ALL_CLASSES.map((c) => h('option', { key: c, value: c }, 'Kelas ' + c))
-                  ),
+                  h('select', { value: stuClass, onChange: (e) => setStuClass(e.target.value), className: 'px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs font-extrabold bg-white' }, ALL_CLASSES.map((c) => h('option', { key: c, value: c }, 'Kelas ' + c))),
                   h('div', { className: 'flex gap-1.5' },
                     h('input', { maxLength: 5, value: stuPwd, onChange: (e) => setStuPwd(e.target.value.toUpperCase()), placeholder: 'Pass 5 Char', className: 'w-full px-3 py-2.5 rounded-xl border border-slate-300 font-mono text-xs font-black uppercase' }),
                     h('button', { type: 'button', onClick: () => setStuPwd(genPwd5()), className: 'px-3 py-2.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 font-extrabold text-xs shrink-0' }, h(LucideIcon, { name: 'RefreshCw', className: 'w-3.5 h-3.5' })),
-                    h('button', {
-                      type: 'button',
-                      onClick: () => setStuLockNew((v) => !v),
-                      className: 'px-3 py-2.5 rounded-xl font-extrabold text-xs shrink-0 border ' + (stuLockNew ? 'bg-amber-500 border-amber-600 text-slate-950' : 'bg-slate-100 border-slate-300 text-slate-700')
-                    }, h(LucideIcon, { name: stuLockNew ? 'Lock' : 'Unlock', className: 'w-3.5 h-3.5' }))
+                    h('button', { type: 'button', onClick: () => setStuLockNew((v) => !v), className: 'px-3 py-2.5 rounded-xl font-extrabold text-xs shrink-0 border ' + (stuLockNew ? 'bg-amber-500 border-amber-600 text-slate-950' : 'bg-slate-100 border-slate-300 text-slate-700') }, h(LucideIcon, { name: stuLockNew ? 'Lock' : 'Unlock', className: 'w-3.5 h-3.5' }))
                   )
                 ),
                 h('div', { className: 'flex justify-end' },
-                  h('button', { type: 'submit', className: 'px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs flex items-center gap-1.5' },
-                    h(LucideIcon, { name: 'Plus', className: 'w-4 h-4' }),
-                    h('span', null, 'Simpan Siswa')
-                  )
+                  h('button', { type: 'submit', className: 'px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs flex items-center gap-1.5' }, h(LucideIcon, { name: 'Plus', className: 'w-4 h-4' }), h('span', null, 'Simpan Siswa'))
                 )
               ),
               h('div', { className: 'bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-4' },
@@ -1482,44 +1245,17 @@
                     h('input', { value: stuSearch, onChange: (e) => setStuSearch(e.target.value), placeholder: 'Cari Nama / NIS...', className: 'px-3.5 py-2 rounded-xl border border-slate-300 text-xs font-semibold' })
                   ),
                   h('div', { className: 'flex flex-wrap items-center gap-2' },
-                    h('button', {
-                      type: 'button',
-                      onClick: () => { setStudents((p) => p.map((s) => (stuFilterClass === 'ALL' || s.className === stuFilterClass) ? { ...s, passwordLocked: true } : s)); showToast('Password dikunci.', 'info'); },
-                      className: 'px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 font-extrabold text-xs flex items-center gap-1'
-                    }, h(LucideIcon, { name: 'Lock', className: 'w-3.5 h-3.5 text-amber-600' }), h('span', null, 'Kunci Semua')),
-                    h('button', {
-                      type: 'button',
-                      onClick: () => { setStudents((p) => p.map((s) => (stuFilterClass === 'ALL' || s.className === stuFilterClass) ? { ...s, passwordLocked: false } : s)); showToast('Kunci password dibuka.', 'info'); },
-                      className: 'px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 font-extrabold text-xs flex items-center gap-1'
-                    }, h(LucideIcon, { name: 'Unlock', className: 'w-3.5 h-3.5 text-emerald-600' }), h('span', null, 'Buka Kunci')),
-                    h('button', {
-                      type: 'button',
-                      onClick: () => { setStudents((p) => p.map((s) => (!s.passwordLocked && (stuFilterClass === 'ALL' || s.className === stuFilterClass)) ? { ...s, password: genPwd5() } : s)); showToast('Password 5 karakter diacak!', 'success'); },
-                      className: 'px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs flex items-center gap-1.5'
-                    }, h(LucideIcon, { name: 'RefreshCw', className: 'w-3.5 h-3.5' }), h('span', null, 'Acak Password (5 Karakter)')),
-                    h('button', {
-                      type: 'button',
-                      onClick: () => { setStudents((p) => p.map((s) => (!s.passwordLocked && (stuFilterClass === 'ALL' || s.className === stuFilterClass)) ? { ...s, password: '123' } : s)); showToast('Password direset menjadi 123!', 'success'); },
-                      className: 'px-3.5 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-900 font-extrabold text-xs flex items-center gap-1.5'
-                    }, h(LucideIcon, { name: 'KeyRound', className: 'w-3.5 h-3.5 text-indigo-700' }), h('span', null, 'Reset Password (123)')),
-                    h('button', {
-                      type: 'button',
-                      onClick: () => { setPrintScope(stuFilterClass === 'ALL' ? 'ALL' : stuFilterClass); setShowPrintModal(true); },
-                      className: 'px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs flex items-center gap-1.5 shadow'
-                    }, h(LucideIcon, { name: 'Printer', className: 'w-3.5 h-3.5' }), h('span', null, 'Cetak Kartu Login'))
+                    h('button', { type: 'button', onClick: () => { setStudents((p) => p.map((s) => (stuFilterClass === 'ALL' || s.className === stuFilterClass) ? { ...s, passwordLocked: true } : s)); showToast('Password dikunci.', 'info'); }, className: 'px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 font-extrabold text-xs flex items-center gap-1' }, h(LucideIcon, { name: 'Lock', className: 'w-3.5 h-3.5 text-amber-600' }), h('span', null, 'Kunci Semua')),
+                    h('button', { type: 'button', onClick: () => { setStudents((p) => p.map((s) => (stuFilterClass === 'ALL' || s.className === stuFilterClass) ? { ...s, passwordLocked: false } : s)); showToast('Kunci password dibuka.', 'info'); }, className: 'px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 font-extrabold text-xs flex items-center gap-1' }, h(LucideIcon, { name: 'Unlock', className: 'w-3.5 h-3.5 text-emerald-600' }), h('span', null, 'Buka Kunci')),
+                    h('button', { type: 'button', onClick: () => { setStudents((p) => p.map((s) => (!s.passwordLocked && (stuFilterClass === 'ALL' || s.className === stuFilterClass)) ? { ...s, password: genPwd5() } : s)); showToast('Password 5 karakter diacak!', 'success'); }, className: 'px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs flex items-center gap-1.5' }, h(LucideIcon, { name: 'RefreshCw', className: 'w-3.5 h-3.5' }), h('span', null, 'Acak Password (5 Karakter)')),
+                    h('button', { type: 'button', onClick: () => { setStudents((p) => p.map((s) => (!s.passwordLocked && (stuFilterClass === 'ALL' || s.className === stuFilterClass)) ? { ...s, password: '123' } : s)); showToast('Password direset menjadi 123!', 'success'); }, className: 'px-3.5 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-900 font-extrabold text-xs flex items-center gap-1.5' }, h(LucideIcon, { name: 'KeyRound', className: 'w-3.5 h-3.5 text-indigo-700' }), h('span', null, 'Reset Password (123)')),
+                    h('button', { type: 'button', onClick: () => { setPrintScope(stuFilterClass === 'ALL' ? 'ALL' : stuFilterClass); setShowPrintModal(true); }, className: 'px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs flex items-center gap-1.5 shadow' }, h(LucideIcon, { name: 'Printer', className: 'w-3.5 h-3.5' }), h('span', null, 'Cetak Kartu Login'))
                   )
                 ),
                 h('div', { className: 'overflow-x-auto' },
                   h('table', { className: 'w-full text-left text-xs' },
                     h('thead', { className: 'bg-slate-100 font-extrabold text-slate-700' },
-                      h('tr', null,
-                        h('th', { className: 'p-3 rounded-l-xl' }, 'NIS / NISN'),
-                        h('th', { className: 'p-3' }, 'Nama Siswa'),
-                        h('th', { className: 'p-3' }, 'Kelas'),
-                        h('th', { className: 'p-3' }, 'Password'),
-                        h('th', { className: 'p-3' }, 'Status'),
-                        h('th', { className: 'p-3 rounded-r-xl text-right' }, 'Aksi')
-                      )
+                      h('tr', null, h('th', { className: 'p-3 rounded-l-xl' }, 'NIS / NISN'), h('th', { className: 'p-3' }, 'Nama Siswa'), h('th', { className: 'p-3' }, 'Kelas'), h('th', { className: 'p-3' }, 'Password'), h('th', { className: 'p-3' }, 'Status'), h('th', { className: 'p-3 rounded-r-xl text-right' }, 'Aksi'))
                     ),
                     h('tbody', { className: 'divide-y divide-slate-100' },
                       filteredStudents.map((st) => h('tr', { key: st.id, className: 'hover:bg-slate-50' },
@@ -1529,10 +1265,7 @@
                         h('td', { className: 'p-3' },
                           h('div', { className: 'inline-flex items-center gap-1.5' },
                             h('span', { className: 'px-2.5 py-1 rounded-lg font-mono font-black tracking-wider ' + (st.passwordLocked ? 'bg-amber-50 text-amber-900 border border-amber-300' : 'bg-indigo-50 text-indigo-800') }, st.password),
-                            st.passwordLocked && h('span', { className: 'inline-flex items-center gap-0.5 px-2 py-0.5 rounded-md bg-amber-100 text-amber-800 font-extrabold text-[10px]' },
-                              h(LucideIcon, { name: 'Lock', className: 'w-3 h-3' }),
-                              h('span', null, 'Terkunci')
-                            )
+                            st.passwordLocked && h('span', { className: 'inline-flex items-center gap-0.5 px-2 py-0.5 rounded-md bg-amber-100 text-amber-800 font-extrabold text-[10px]' }, h(LucideIcon, { name: 'Lock', className: 'w-3 h-3' }), h('span', null, 'Terkunci'))
                           )
                         ),
                         h('td', { className: 'p-3' },
@@ -1549,45 +1282,18 @@
                               showToast('Status ' + st.name + ' diubah menjadi ' + val.toUpperCase() + '.', 'info');
                             },
                             className: 'px-2.5 py-1 rounded-full font-extrabold text-xs cursor-pointer border ' + (
-                              (!st.isAllowed && !st.isActive)
-                                ? 'bg-rose-100 text-rose-800 border-rose-300'
-                                : (st.isActive && st.isAllowed)
-                                ? 'bg-emerald-100 text-emerald-800 border-emerald-300'
-                                : 'bg-amber-100 text-amber-800 border-amber-300'
+                              (!st.isAllowed && !st.isActive) ? 'bg-rose-100 text-rose-800 border-rose-300' : (st.isActive && st.isAllowed) ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : 'bg-amber-100 text-amber-800 border-amber-300'
                             )
-                          },
-                            h('option', { value: 'aktif' }, 'Aktif'),
-                            h('option', { value: 'nonaktif' }, 'Nonaktif'),
-                            h('option', { value: 'ditahan' }, 'Ditahan')
-                          )
+                          }, h('option', { value: 'aktif' }, 'Aktif'), h('option', { value: 'nonaktif' }, 'Nonaktif'), h('option', { value: 'ditahan' }, 'Ditahan'))
                         ),
                         h('td', { className: 'p-3 text-right' },
                           h('div', { className: 'inline-flex flex-wrap items-center justify-end gap-1.5' },
-                            h('button', {
-                              type: 'button',
-                              onClick: () => setStudents((p) => p.map((x) => x.id === st.id ? { ...x, passwordLocked: !x.passwordLocked } : x)),
-                              className: 'px-2.5 py-1.5 rounded-lg font-extrabold inline-flex items-center gap-1 ' + (st.passwordLocked ? 'bg-amber-500 text-slate-950' : 'bg-slate-100 hover:bg-slate-200 text-slate-700')
-                            },
-                              h(LucideIcon, { name: st.passwordLocked ? 'Lock' : 'Unlock', className: 'w-3 h-3' }),
-                              h('span', null, st.passwordLocked ? 'Terkunci' : 'Kunci')
+                            h('button', { type: 'button', onClick: () => setStudents((p) => p.map((x) => x.id === st.id ? { ...x, passwordLocked: !x.passwordLocked } : x)), className: 'px-2.5 py-1.5 rounded-lg font-extrabold inline-flex items-center gap-1 ' + (st.passwordLocked ? 'bg-amber-500 text-slate-950' : 'bg-slate-100 hover:bg-slate-200 text-slate-700') },
+                              h(LucideIcon, { name: st.passwordLocked ? 'Lock' : 'Unlock', className: 'w-3 h-3' }), h('span', null, st.passwordLocked ? 'Terkunci' : 'Kunci')
                             ),
-                            h('button', {
-                              type: 'button',
-                              disabled: !!st.passwordLocked,
-                              onClick: () => setStudents((p) => p.map((x) => x.id === st.id ? { ...x, password: genPwd5() } : x)),
-                              className: 'px-2.5 py-1.5 rounded-lg bg-amber-50 hover:bg-amber-100 disabled:opacity-40 text-amber-800 font-extrabold'
-                            }, 'Acak'),
-                            h('button', {
-                              type: 'button',
-                              disabled: !!st.passwordLocked,
-                              onClick: () => { setStudents((p) => p.map((x) => x.id === st.id ? { ...x, password: '123' } : x)); showToast('Password direset ke 123.', 'success'); },
-                              className: 'px-2.5 py-1.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 disabled:opacity-40 text-indigo-700 font-extrabold'
-                            }, 'Reset 123'),
-                            h('button', {
-                              type: 'button',
-                              onClick: () => setStudents((p) => p.filter((x) => x.id !== st.id)),
-                              className: 'px-2.5 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 font-extrabold'
-                            }, 'Hapus')
+                            h('button', { type: 'button', disabled: !!st.passwordLocked, onClick: () => setStudents((p) => p.map((x) => x.id === st.id ? { ...x, password: genPwd5() } : x)), className: 'px-2.5 py-1.5 rounded-lg bg-amber-50 hover:bg-amber-100 disabled:opacity-40 text-amber-800 font-extrabold' }, 'Acak'),
+                            h('button', { type: 'button', disabled: !!st.passwordLocked, onClick: () => { setStudents((p) => p.map((x) => x.id === st.id ? { ...x, password: '123' } : x)); showToast('Password direset ke 123.', 'success'); }, className: 'px-2.5 py-1.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 disabled:opacity-40 text-indigo-700 font-extrabold' }, 'Reset 123'),
+                            h('button', { type: 'button', onClick: () => setStudents((p) => p.filter((x) => x.id !== st.id)), className: 'px-2.5 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 font-extrabold' }, 'Hapus')
                           )
                         )
                       ))
@@ -1620,24 +1326,13 @@
                       showToast('Rekap nilai berhasil diunduh!', 'success');
                     },
                     className: 'px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs flex items-center gap-1.5'
-                  },
-                    h(LucideIcon, { name: 'FileSpreadsheet', className: 'w-3.5 h-3.5' }),
-                    h('span', null, 'Unduh Rekap Excel')
-                  )
+                  }, h(LucideIcon, { name: 'FileSpreadsheet', className: 'w-3.5 h-3.5' }), h('span', null, 'Unduh Rekap Excel'))
                 )
               ),
               h('div', { className: 'overflow-x-auto' },
                 h('table', { className: 'w-full text-left text-xs' },
                   h('thead', { className: 'bg-slate-100 font-extrabold text-slate-700' },
-                    h('tr', null,
-                      h('th', { className: 'p-3 rounded-l-xl' }, 'NIS'),
-                      h('th', { className: 'p-3' }, 'Nama Peserta'),
-                      h('th', { className: 'p-3' }, 'Kelas'),
-                      h('th', { className: 'p-3' }, 'Mata Pelajaran'),
-                      h('th', { className: 'p-3' }, 'Nilai'),
-                      h('th', { className: 'p-3' }, 'Status'),
-                      h('th', { className: 'p-3 rounded-r-xl text-right' }, 'Aksi')
-                    )
+                    h('tr', null, h('th', { className: 'p-3 rounded-l-xl' }, 'NIS'), h('th', { className: 'p-3' }, 'Nama Peserta'), h('th', { className: 'p-3' }, 'Kelas'), h('th', { className: 'p-3' }, 'Mata Pelajaran'), h('th', { className: 'p-3' }, 'Nilai'), h('th', { className: 'p-3' }, 'Status'), h('th', { className: 'p-3 rounded-r-xl text-right' }, 'Aksi'))
                   ),
                   h('tbody', { className: 'divide-y divide-slate-100' },
                     filteredResults.map((r) => h('tr', { key: r.id, className: 'hover:bg-slate-50' },
@@ -1652,11 +1347,7 @@
                           : h('span', { className: 'px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-extrabold' }, 'Terkoreksi')
                       ),
                       h('td', { className: 'p-3 text-right' },
-                        h('button', {
-                          type: 'button',
-                          onClick: () => { setGradingRes(r); setEssayScoresMap(r.essayScores || {}); },
-                          className: 'px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-extrabold'
-                        }, 'Koreksi Uraian')
+                        h('button', { type: 'button', onClick: () => { setGradingRes(r); setEssayScoresMap(r.essayScores || {}); }, className: 'px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-extrabold' }, 'Koreksi Uraian')
                       )
                     ))
                   )
@@ -1683,39 +1374,22 @@
               },
                 h('div', { className: 'flex items-center justify-between' },
                   h('h2', { className: 'text-base font-black text-slate-900' }, editingStaffId ? 'Edit Akun Guru / Proktor' : 'Tambah Akun Guru / Proktor'),
-                  editingStaffId && h('button', {
-                    type: 'button',
-                    onClick: () => { setEditingStaffId(null); setStfName(''); setStfUser(''); setStfRole('guru'); setStfPwd('123'); },
-                    className: 'px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-xs font-extrabold'
-                  }, 'Batal Edit')
+                  editingStaffId && h('button', { type: 'button', onClick: () => { setEditingStaffId(null); setStfName(''); setStfUser(''); setStfRole('guru'); setStfPwd('123'); }, className: 'px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-xs font-extrabold' }, 'Batal Edit')
                 ),
                 h('div', { className: 'grid sm:grid-cols-2 lg:grid-cols-4 gap-3' },
                   h('input', { value: stfName, onChange: (e) => setStfName(e.target.value), placeholder: 'Nama Lengkap & Gelar', className: 'px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs font-bold' }),
                   h('input', { value: stfUser, onChange: (e) => setStfUser(e.target.value), placeholder: 'Username Login', className: 'px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs font-mono font-bold' }),
-                  h('select', { value: stfRole, onChange: (e) => setStfRole(e.target.value), className: 'px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs font-extrabold bg-white' },
-                    h('option', { value: 'guru' }, 'Guru Mata Pelajaran'),
-                    h('option', { value: 'proktor' }, 'Proktor Ujian'),
-                    h('option', { value: 'admin' }, 'Administrator')
-                  ),
+                  h('select', { value: stfRole, onChange: (e) => setStfRole(e.target.value), className: 'px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs font-extrabold bg-white' }, h('option', { value: 'guru' }, 'Guru Mata Pelajaran'), h('option', { value: 'proktor' }, 'Proktor Ujian'), h('option', { value: 'admin' }, 'Administrator')),
                   h('input', { value: stfPwd, onChange: (e) => setStfPwd(e.target.value), placeholder: 'Password Login', className: 'px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs font-mono font-bold' })
                 ),
                 h('div', { className: 'flex justify-end' },
-                  h('button', { type: 'submit', className: 'px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs flex items-center gap-1.5' },
-                    h(LucideIcon, { name: 'CheckCircle2', className: 'w-4 h-4 text-amber-400' }),
-                    h('span', null, editingStaffId ? 'Simpan Perubahan Akun' : 'Tambah Akun Staf')
-                  )
+                  h('button', { type: 'submit', className: 'px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs flex items-center gap-1.5' }, h(LucideIcon, { name: 'CheckCircle2', className: 'w-4 h-4 text-amber-400' }), h('span', null, editingStaffId ? 'Simpan Perubahan Akun' : 'Tambah Akun Staf'))
                 )
               ),
               h('div', { className: 'bg-white rounded-3xl border border-slate-200 p-6 shadow-sm overflow-x-auto' },
                 h('table', { className: 'w-full text-left text-xs' },
                   h('thead', { className: 'bg-slate-100 font-extrabold text-slate-700' },
-                    h('tr', null,
-                      h('th', { className: 'p-3 rounded-l-xl' }, 'Nama Akun'),
-                      h('th', { className: 'p-3' }, 'Username'),
-                      h('th', { className: 'p-3' }, 'Hak Akses'),
-                      h('th', { className: 'p-3' }, 'Password'),
-                      h('th', { className: 'p-3 rounded-r-xl text-right' }, 'Aksi')
-                    )
+                    h('tr', null, h('th', { className: 'p-3 rounded-l-xl' }, 'Nama Akun'), h('th', { className: 'p-3' }, 'Username'), h('th', { className: 'p-3' }, 'Hak Akses'), h('th', { className: 'p-3' }, 'Password'), h('th', { className: 'p-3 rounded-r-xl text-right' }, 'Aksi'))
                   ),
                   h('tbody', { className: 'divide-y divide-slate-100' },
                     staffAccounts.map((acc) => h('tr', { key: acc.id, className: 'hover:bg-slate-50' },
@@ -1726,34 +1400,13 @@
                       h('td', { className: 'p-3 text-right' },
                         confirmDelStaffId === acc.id
                           ? h('div', { className: 'inline-flex items-center gap-1.5' },
-                              h('button', {
-                                type: 'button',
-                                onClick: () => {
-                                  if (staffAccounts.length <= 1) return showToast('Minimal tersisa 1 akun.', 'error');
-                                  setStaffAccounts((p) => p.filter((a) => a.id !== acc.id));
-                                  setConfirmDelStaffId(null);
-                                  showToast('Akun dihapus.', 'info');
-                                },
-                                className: 'px-2.5 py-1.5 rounded-lg bg-rose-600 text-white font-extrabold'
-                              }, 'Ya, Hapus'),
+                              h('button', { type: 'button', onClick: () => { if (staffAccounts.length <= 1) return showToast('Minimal tersisa 1 akun.', 'error'); setStaffAccounts((p) => p.filter((a) => a.id !== acc.id)); setConfirmDelStaffId(null); showToast('Akun dihapus.', 'info'); }, className: 'px-2.5 py-1.5 rounded-lg bg-rose-600 text-white font-extrabold' }, 'Ya, Hapus'),
                               h('button', { type: 'button', onClick: () => setConfirmDelStaffId(null), className: 'px-2.5 py-1.5 rounded-lg bg-slate-200 text-slate-800 font-extrabold' }, 'Batal')
                             )
                           : h('div', { className: 'inline-flex items-center gap-1.5' },
-                              h('button', {
-                                type: 'button',
-                                onClick: () => { setEditingStaffId(acc.id); setStfName(acc.name); setStfUser(acc.username); setStfRole(acc.role); setStfPwd(acc.password); },
-                                className: 'px-2.5 py-1.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-extrabold'
-                              }, 'Edit'),
-                              h('button', {
-                                type: 'button',
-                                onClick: () => { setStaffAccounts((p) => p.map((a) => a.id === acc.id ? { ...a, password: '123' } : a)); showToast('Password direset ke 123.', 'info'); },
-                                className: 'px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-extrabold'
-                              }, 'Reset (123)'),
-                              h('button', {
-                                type: 'button',
-                                onClick: () => setConfirmDelStaffId(acc.id),
-                                className: 'px-2.5 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 font-extrabold'
-                              }, 'Hapus')
+                              h('button', { type: 'button', onClick: () => { setEditingStaffId(acc.id); setStfName(acc.name); setStfUser(acc.username); setStfRole(acc.role); setStfPwd(acc.password); }, className: 'px-2.5 py-1.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-extrabold' }, 'Edit'),
+                              h('button', { type: 'button', onClick: () => { setStaffAccounts((p) => p.map((a) => a.id === acc.id ? { ...a, password: '123' } : a)); showToast('Password direset ke 123.', 'info'); }, className: 'px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-extrabold' }, 'Reset (123)'),
+                              h('button', { type: 'button', onClick: () => setConfirmDelStaffId(acc.id), className: 'px-2.5 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 font-extrabold' }, 'Hapus')
                             )
                       )
                     ))
@@ -1762,23 +1415,65 @@
               )
             ),
 
-            // TAB 7: SKEMA NEXT.JS & SUPABASE
-            activeTab === 'schema' && h('div', { className: 'bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-4' },
-              h('h2', { className: 'text-base font-black text-slate-900' }, 'Arsitektur Produksi Next.js + Supabase'),
-              h('pre', { className: 'p-4 rounded-2xl bg-slate-950 text-emerald-300 text-xs font-mono overflow-x-auto leading-relaxed' },
-                '-- Skema PostgreSQL / Supabase K-CBT SMPN 1 Haurwangi\n' +
-                'CREATE TABLE students (\n' +
-                '  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n' +
-                '  nis VARCHAR(30) UNIQUE NOT NULL,\n' +
-                '  full_name TEXT NOT NULL,\n' +
-                '  class_name VARCHAR(10) NOT NULL,\n' +
-                '  grade CHAR(1) NOT NULL,\n' +
-                '  password_hash TEXT NOT NULL,\n' +
-                '  password_locked BOOLEAN DEFAULT FALSE,\n' +
-                '  is_active BOOLEAN DEFAULT TRUE,\n' +
-                '  is_allowed BOOLEAN DEFAULT TRUE,\n' +
-                '  violations INT DEFAULT 0\n' +
-                ');'
+            // TAB 7: KONEKSI CLOUD SUPABASE REALTIME & SKEMA SQL
+            activeTab === 'schema' && h('div', { className: 'space-y-6' },
+              h('div', { className: 'bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-4' },
+                h('div', { className: 'flex flex-wrap items-center justify-between gap-2' },
+                  h('div', null,
+                    h('h2', { className: 'text-base font-black text-slate-900' }, 'Konfigurasi Koneksi Cloud Supabase (Realtime Sync)'),
+                    h('p', { className: 'text-xs text-slate-500' }, 'Tempelkan Project URL dan Anon Public Key dari Dashboard Supabase Anda agar seluruh perangkat siswa & proktor tersinkron otomatis.')
+                  ),
+                  h('span', { className: 'px-3 py-1 rounded-full text-xs font-extrabold ' + (supabaseConnected ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800') },
+                    supabaseConnected ? '● Terhubung ke Supabase Cloud' : '○ Belum Terhubung (Mode Lokal)'
+                  )
+                ),
+                h('div', { className: 'grid md:grid-cols-2 gap-3' },
+                  h('div', null,
+                    h('label', { className: 'block text-[11px] font-extrabold text-slate-600 mb-1' }, 'Supabase Project URL'),
+                    h('input', {
+                      type: 'text', value: sbUrlInput, onChange: (e) => setSbUrlInput(e.target.value),
+                      placeholder: 'https://xxxxxxxxxxxx.supabase.co',
+                      className: 'w-full px-3.5 py-2.5 rounded-xl border border-slate-300 font-mono text-xs font-bold'
+                    })
+                  ),
+                  h('div', null,
+                    h('label', { className: 'block text-[11px] font-extrabold text-slate-600 mb-1' }, 'Supabase Anon / Public Key'),
+                    h('input', {
+                      type: 'text', value: sbKeyInput, onChange: (e) => setSbKeyInput(e.target.value),
+                      placeholder: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...',
+                      className: 'w-full px-3.5 py-2.5 rounded-xl border border-slate-300 font-mono text-xs font-bold'
+                    })
+                  )
+                ),
+                h('div', { className: 'flex flex-wrap items-center gap-2 pt-1' },
+                  h('button', {
+                    type: 'button',
+                    onClick: () => onSaveSupabaseConfig({ url: sbUrlInput.trim(), anonKey: sbKeyInput.trim() }),
+                    className: 'px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs flex items-center gap-1.5 shadow'
+                  }, h(LucideIcon, { name: 'CheckCircle2', className: 'w-4 h-4' }), h('span', null, 'Hubungkan & Tarik Data Supabase')),
+                  supabaseConnected && h('button', {
+                    type: 'button',
+                    onClick: onPushAllToSupabase,
+                    className: 'px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs flex items-center gap-1.5'
+                  }, h(LucideIcon, { name: 'Upload', className: 'w-3.5 h-3.5' }), h('span', null, 'Unggah Semua Data Lokal ke Supabase')),
+                  supabaseConnected && h('button', {
+                    type: 'button',
+                    onClick: onPullAllFromSupabase,
+                    className: 'px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs flex items-center gap-1.5'
+                  }, h(LucideIcon, { name: 'RefreshCw', className: 'w-3.5 h-3.5' }), h('span', null, 'Muat Ulang dari Supabase'))
+                )
+              ),
+              h('div', { className: 'bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-3' },
+                h('h3', { className: 'text-sm font-black text-slate-900' }, 'Skema SQL Tabel Supabase (Jalankan Sekali di SQL Editor Supabase)'),
+                h('pre', { className: 'p-4 rounded-2xl bg-slate-950 text-emerald-300 text-xs font-mono overflow-x-auto leading-relaxed' },
+                  'CREATE TABLE IF NOT EXISTS staff_accounts (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), name TEXT NOT NULL, username VARCHAR(50) UNIQUE NOT NULL, role VARCHAR(20) NOT NULL, password TEXT NOT NULL);\n' +
+                  'CREATE TABLE IF NOT EXISTS students (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), nis VARCHAR(30) UNIQUE NOT NULL, name TEXT NOT NULL, class_name VARCHAR(10) NOT NULL, grade CHAR(1) NOT NULL, password VARCHAR(20) DEFAULT \'123\', password_locked BOOLEAN DEFAULT FALSE, is_active BOOLEAN DEFAULT TRUE, is_allowed BOOLEAN DEFAULT TRUE, violations INT DEFAULT 0, last_violation_reason TEXT DEFAULT \'\');\n' +
+                  'CREATE TABLE IF NOT EXISTS exams (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), subject TEXT NOT NULL, grade CHAR(1) NOT NULL, duration_minutes INT DEFAULT 60, is_active BOOLEAN DEFAULT TRUE, shuffle_questions BOOLEAN DEFAULT TRUE, shuffle_options BOOLEAN DEFAULT TRUE, exam_date DATE DEFAULT CURRENT_DATE);\n' +
+                  'CREATE TABLE IF NOT EXISTS questions (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), subject TEXT NOT NULL, grade CHAR(1) NOT NULL, type VARCHAR(15) NOT NULL, weight INT DEFAULT 10, prompt TEXT NOT NULL, options JSONB DEFAULT \'{}\'::jsonb, has_option_e BOOLEAN DEFAULT FALSE, correct_option VARCHAR(5) DEFAULT \'A\', correct_options JSONB DEFAULT \'[]\'::jsonb, statements JSONB DEFAULT \'[]\'::jsonb, correct_short_answer TEXT DEFAULT \'\', essay_rubric TEXT DEFAULT \'\');\n' +
+                  'CREATE TABLE IF NOT EXISTS saved_exam_sessions (session_key TEXT PRIMARY KEY, student_id TEXT, exam_id TEXT, questions JSONB DEFAULT \'[]\'::jsonb, current_index INT DEFAULT 0, answers JSONB DEFAULT \'{}\'::jsonb, doubtful JSONB DEFAULT \'{}\'::jsonb, seconds_left INT DEFAULT 3600);\n' +
+                  'CREATE TABLE IF NOT EXISTS exam_results (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), student_id TEXT, nis VARCHAR(30), student_name TEXT, class_name VARCHAR(10), subject TEXT, score INT DEFAULT 0, needs_essay_grading BOOLEAN DEFAULT FALSE, answers JSONB DEFAULT \'{}\'::jsonb, essay_scores JSONB DEFAULT \'{}\'::jsonb, submitted_at TEXT);\n' +
+                  'CREATE TABLE IF NOT EXISTS exam_settings (id INT PRIMARY KEY DEFAULT 1, exam_token VARCHAR(10) NOT NULL DEFAULT \'HAUR01\');'
+                )
               )
             )
           )
@@ -1957,13 +1652,28 @@
     }
 
     // ========================================================================
-    // 4. ROOT APLIKASI OFFLINE HTML
+    // 4. ROOT APLIKASI OFFLINE + SUPABASE CLOUD REALTIME
     // ========================================================================
     function OfflineKCBTApp() {
       const loadSaved = () => {
         try { return JSON.parse(localStorage.getItem(STORAGE_KEY_HTML) || 'null'); } catch { return null; }
       };
+      const loadSbCfg = () => {
+        try {
+          const c = JSON.parse(localStorage.getItem(SUPABASE_CFG_KEY) || 'null');
+          if (c && c.url && c.anonKey) return c;
+        } catch {}
+        return { url: DEFAULT_SUPABASE_URL, anonKey: DEFAULT_SUPABASE_ANON_KEY };
+      };
+
       const saved = useMemo(() => loadSaved(), []);
+      const [supabaseConfig, setSupabaseConfig] = useState(loadSbCfg);
+      const [supabaseConnected, setSupabaseConnected] = useState(false);
+
+      const supabaseClient = useMemo(() => {
+        if (!supabaseConfig.url || !supabaseConfig.anonKey || !window.supabase) return null;
+        try { return window.supabase.createClient(supabaseConfig.url, supabaseConfig.anonKey); } catch { return null; }
+      }, [supabaseConfig]);
 
       const [students, setStudents] = useState(saved?.students?.length ? saved.students : (INITIAL_PAYLOAD.students || []));
       const [staffAccounts, setStaffAccounts] = useState(saved?.staffAccounts?.length ? saved.staffAccounts : (INITIAL_PAYLOAD.staffAccounts?.length ? INITIAL_PAYLOAD.staffAccounts : DEFAULT_STAFF_HTML));
@@ -1983,24 +1693,140 @@
         setTimeout(() => setToast(null), 3500);
       }, []);
 
+      // Simpan lokal sebagai cadangan otomatis
       useEffect(() => {
         try {
           localStorage.setItem(STORAGE_KEY_HTML, JSON.stringify({ students, staffAccounts, exams, questions, results, savedSessions, examToken }));
         } catch {}
       }, [students, staffAccounts, exams, questions, results, savedSessions, examToken]);
 
+      // Tarik seluruh data dari Supabase
+      const pullAllFromSupabase = useCallback(async (clientOverride) => {
+        const sb = clientOverride || supabaseClient;
+        if (!sb) return;
+        try {
+          const [resStu, resStf, resEx, resQ, resRes, resSes, resTok] = await Promise.all([
+            sb.from('students').select('*'),
+            sb.from('staff_accounts').select('*'),
+            sb.from('exams').select('*'),
+            sb.from('questions').select('*'),
+            sb.from('exam_results').select('*'),
+            sb.from('saved_exam_sessions').select('*'),
+            sb.from('exam_settings').select('*').eq('id', 1).maybeSingle()
+          ]);
+          if (resStu.error) throw resStu.error;
+          setSupabaseConnected(true);
+          if (Array.isArray(resStu.data) && resStu.data.length > 0) setStudents(resStu.data.map(mapStudentFromDb));
+          if (Array.isArray(resStf.data) && resStf.data.length > 0) setStaffAccounts(resStf.data);
+          if (Array.isArray(resEx.data) && resEx.data.length > 0) setExams(resEx.data.map(mapExamFromDb));
+          if (Array.isArray(resQ.data) && resQ.data.length > 0) setQuestions(resQ.data.map(mapQuestionFromDb));
+          if (Array.isArray(resRes.data) && resRes.data.length > 0) {
+            setResults(resRes.data.map((r) => ({
+              id: r.id, studentId: r.student_id, nis: r.nis, studentName: r.student_name,
+              className: r.class_name, subject: r.subject, score: r.score,
+              needsEssayGrading: Boolean(r.needs_essay_grading), answers: r.answers || {},
+              essayScores: r.essay_scores || {}, submittedAt: r.submitted_at || ''
+            })));
+          }
+          if (Array.isArray(resSes.data)) {
+            const sesMap = {};
+            resSes.data.forEach((row) => {
+              sesMap[row.session_key] = {
+                examId: row.exam_id, questions: row.questions || [],
+                currentIndex: row.current_index || 0, answers: row.answers || {},
+                doubtful: row.doubtful || {}, secondsLeft: row.seconds_left || 3600
+              };
+            });
+            setSavedSessions(sesMap);
+          }
+          if (resTok.data && resTok.data.exam_token) setExamToken(resTok.data.exam_token);
+        } catch (err) {
+          setSupabaseConnected(false);
+          console.warn('Supabase sync skipped:', err?.message || err);
+        }
+      }, [supabaseClient]);
+
+      // Unggah seluruh data lokal ke Supabase (Migrasi Awal)
+      const pushAllToSupabase = useCallback(async () => {
+        if (!supabaseClient) return;
+        try {
+          if (students.length > 0) {
+            await supabaseClient.from('students').upsert(students.map(mapStudentToDb), { onConflict: 'nis' });
+          }
+          if (staffAccounts.length > 0) {
+            await supabaseClient.from('staff_accounts').upsert(
+              staffAccounts.map((a) => ({ name: a.name, username: a.username, role: a.role, password: a.password })),
+              { onConflict: 'username' }
+            );
+          }
+          if (exams.length > 0) {
+            await supabaseClient.from('exams').insert(exams.map(mapExamToDb));
+          }
+          if (questions.length > 0) {
+            await supabaseClient.from('questions').insert(questions.map(mapQuestionToDb));
+          }
+          await supabaseClient.from('exam_settings').upsert({ id: 1, exam_token: examToken });
+          showToast('Seluruh data lokal berhasil diunggah ke Supabase Cloud!', 'success');
+          pullAllFromSupabase();
+        } catch (err) {
+          showToast('Gagal mengunggah ke Supabase: ' + (err?.message || 'Periksa tabel SQL'), 'error');
+        }
+      }, [supabaseClient, students, staffAccounts, exams, questions, examToken, showToast, pullAllFromSupabase]);
+
+      // Koneksi awal & Realtime subscription Supabase
+      useEffect(() => {
+        if (!supabaseClient) { setSupabaseConnected(false); return; }
+        pullAllFromSupabase(supabaseClient);
+        const channel = supabaseClient.channel('kcbt_realtime_sync')
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'students' }, () => pullAllFromSupabase(supabaseClient))
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'exam_settings' }, () => pullAllFromSupabase(supabaseClient))
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'exams' }, () => pullAllFromSupabase(supabaseClient))
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'exam_results' }, () => pullAllFromSupabase(supabaseClient))
+          .subscribe();
+        return () => { supabaseClient.removeChannel(channel); };
+      }, [supabaseClient, pullAllFromSupabase]);
+
+      // Wrapper Setter yang juga menyinkronkan perubahan ke Supabase
+      const setStudentsSynced = useCallback((updater) => {
+        setStudents((prev) => {
+          const next = typeof updater === 'function' ? updater(prev) : updater;
+          if (supabaseClient && supabaseConnected) {
+            supabaseClient.from('students').upsert(next.map(mapStudentToDb), { onConflict: 'nis' }).then(() => {});
+          }
+          return next;
+        });
+      }, [supabaseClient, supabaseConnected]);
+
+      const setStaffSynced = useCallback((updater) => {
+        setStaffAccounts((prev) => {
+          const next = typeof updater === 'function' ? updater(prev) : updater;
+          if (supabaseClient && supabaseConnected) {
+            supabaseClient.from('staff_accounts').upsert(
+              next.map((a) => ({ name: a.name, username: a.username, role: a.role, password: a.password })),
+              { onConflict: 'username' }
+            ).then(() => {});
+          }
+          return next;
+        });
+      }, [supabaseClient, supabaseConnected]);
+
+      // Rotasi token 10 menit
       useEffect(() => {
         const timer = setInterval(() => {
           setTokenSecondsLeft((prev) => {
             if (prev <= 1) {
-              setExamToken(genToken());
+              const nextTok = genToken();
+              setExamToken(nextTok);
+              if (supabaseClient && supabaseConnected) {
+                supabaseClient.from('exam_settings').upsert({ id: 1, exam_token: nextTok }).then(() => {});
+              }
               return TOKEN_ROTATION_SECONDS;
             }
             return prev - 1;
           });
         }, 1000);
         return () => clearInterval(timer);
-      }, []);
+      }, [supabaseClient, supabaseConnected]);
 
       const handleStudentLogin = ({ grade, nis, password, token }) => {
         const stu = students.find((s) => s.nis.trim().toLowerCase() === nis.trim().toLowerCase() && s.grade === grade);
@@ -2028,8 +1854,7 @@
 
       const handleStaffLogin = ({ username, password }) => {
         const cleanUser = username.trim().toLowerCase();
-        const activeStaffList =
-          Array.isArray(staffAccounts) && staffAccounts.length > 0 ? staffAccounts : DEFAULT_STAFF_HTML;
+        const activeStaffList = Array.isArray(staffAccounts) && staffAccounts.length > 0 ? staffAccounts : DEFAULT_STAFF_HTML;
         const staff = activeStaffList.find((a) => a.username.trim().toLowerCase() === cleanUser);
         if (!staff) return 'Username Guru / Proktor tidak ditemukan.';
         if (staff.password !== password.trim()) return 'Password Guru / Proktor salah.';
@@ -2040,23 +1865,28 @@
       const handleForceTerminateCheating = useCallback((studentId, reasonLog, progressSnapshot) => {
         if (activeExamSession && progressSnapshot) {
           const sessionKey = studentId + '_' + activeExamSession.exam.id;
-          setSavedSessions((prev) => ({
-            ...prev,
-            [sessionKey]: {
-              examId: activeExamSession.exam.id,
-              questions: activeExamSession.questions,
-              currentIndex: progressSnapshot.currentIndex || 0,
-              answers: progressSnapshot.answers || {},
-              doubtful: progressSnapshot.doubtful || {},
-              secondsLeft: progressSnapshot.secondsLeft || (activeExamSession.exam.durationMinutes * 60)
-            }
-          }));
+          const sesData = {
+            examId: activeExamSession.exam.id,
+            questions: activeExamSession.questions,
+            currentIndex: progressSnapshot.currentIndex || 0,
+            answers: progressSnapshot.answers || {},
+            doubtful: progressSnapshot.doubtful || {},
+            secondsLeft: progressSnapshot.secondsLeft || (activeExamSession.exam.durationMinutes * 60)
+          };
+          setSavedSessions((prev) => ({ ...prev, [sessionKey]: sesData }));
+          if (supabaseClient && supabaseConnected) {
+            supabaseClient.from('saved_exam_sessions').upsert({
+              session_key: sessionKey, student_id: studentId, exam_id: activeExamSession.exam.id,
+              questions: sesData.questions, current_index: sesData.currentIndex,
+              answers: sesData.answers, doubtful: sesData.doubtful, seconds_left: sesData.secondsLeft
+            }).then(() => {});
+          }
         }
-        setStudents((prev) => prev.map((s) => s.id === studentId ? { ...s, isActive: false, isAllowed: false, violations: 3, lastViolationReason: reasonLog } : s));
+        setStudentsSynced((prev) => prev.map((s) => s.id === studentId ? { ...s, isActive: false, isAllowed: false, violations: 3, lastViolationReason: reasonLog } : s));
         setActiveExamSession(null);
         setCurrentUser(null);
         showToast('UJIAN DIHENTIKAN (3x Pelanggaran)! Progres disimpan sementara & akun ditahan ke Proktor.', 'error');
-      }, [activeExamSession, showToast]);
+      }, [activeExamSession, supabaseClient, supabaseConnected, setStudentsSynced, showToast]);
 
       const handleSubmitExamAnswers = useCallback((student, exam, examQuestions, answers) => {
         let maxW = 0, gotW = 0, hasEssay = false;
@@ -2082,45 +1912,41 @@
           }
         });
         const finalScore = maxW > 0 ? Math.round((gotW / maxW) * 100) : 0;
-        setResults((prev) => [{
-          id: 'res-' + Date.now(),
-          studentId: student.id,
-          nis: student.nis,
-          studentName: student.name,
-          className: student.className,
-          subject: exam.subject,
-          score: finalScore,
-          needsEssayGrading: hasEssay,
-          answers,
-          essayScores: {},
+        const newResult = {
+          id: 'res-' + Date.now(), studentId: student.id, nis: student.nis,
+          studentName: student.name, className: student.className, subject: exam.subject,
+          score: finalScore, needsEssayGrading: hasEssay, answers, essayScores: {},
           submittedAt: new Date().toLocaleString('id-ID')
-        }, ...prev]);
-        setSavedSessions((prev) => {
-          const copy = { ...prev };
-          delete copy[student.id + '_' + exam.id];
-          return copy;
-        });
+        };
+        setResults((prev) => [newResult, ...prev]);
+        setSavedSessions((prev) => { const c = { ...prev }; delete c[student.id + '_' + exam.id]; return c; });
+        if (supabaseClient && supabaseConnected) {
+          supabaseClient.from('exam_results').insert([{
+            student_id: student.id, nis: student.nis, student_name: student.name,
+            class_name: student.className, subject: exam.subject, score: finalScore,
+            needs_essay_grading: hasEssay, answers, essay_scores: {}, submitted_at: newResult.submittedAt
+          }]).then(() => {});
+          supabaseClient.from('saved_exam_sessions').delete().eq('session_key', student.id + '_' + exam.id).then(() => {});
+        }
         setActiveExamSession(null);
         setCurrentUser(null);
-        showToast('Ujian selesai! Jawaban Anda berhasil dikirim ke server.', 'success');
-      }, [showToast]);
+        showToast('Ujian selesai! Jawaban Anda berhasil dikirim.', 'success');
+      }, [supabaseClient, supabaseConnected, showToast]);
 
       return h('div', { className: 'min-h-screen bg-slate-100 text-slate-900 antialiased' },
         toast && h('div', { className: 'fixed bottom-5 right-5 z-50 max-w-sm' },
           h('div', {
             className: 'px-4 py-3 rounded-2xl shadow-xl border text-xs font-extrabold flex items-center gap-2.5 ' +
               (toast.type === 'error' ? 'bg-rose-600 border-rose-700 text-white' : toast.type === 'success' ? 'bg-emerald-600 border-emerald-700 text-white' : 'bg-slate-900 border-slate-800 text-white')
-          },
-            h(LucideIcon, { name: 'Sparkles', className: 'w-4 h-4 text-amber-300' }),
-            h('span', null, toast.message)
-          )
+          }, h(LucideIcon, { name: 'Sparkles', className: 'w-4 h-4 text-amber-300' }), h('span', null, toast.message))
         ),
         !currentUser
           ? h(LandingLoginPortalHtml, {
               onStudentLogin: handleStudentLogin,
               onStaffLogin: handleStaffLogin,
+              supabaseConnected,
               onRestoreDefaultStaff: () => {
-                setStaffAccounts(DEFAULT_STAFF_HTML);
+                setStaffSynced(DEFAULT_STAFF_HTML);
                 showToast('Akun staf default (admin / guru1 / proktor1, pass: 123) berhasil dipulihkan!', 'success');
               }
             })
@@ -2134,17 +1960,34 @@
           : h(StaffDashboardHtml, {
               user: currentUser.data,
               onLogout: () => setCurrentUser(null),
-              students, setStudents,
-              staffAccounts, setStaffAccounts,
+              students, setStudents: setStudentsSynced,
+              staffAccounts, setStaffAccounts: setStaffSynced,
               exams, setExams,
               questions, setQuestions,
               results, setResults,
               examToken,
               tokenSecondsLeft,
+              supabaseConfig,
+              supabaseConnected,
+              onSaveSupabaseConfig: (cfg) => {
+                localStorage.setItem(SUPABASE_CFG_KEY, JSON.stringify(cfg));
+                setSupabaseConfig(cfg);
+                if (!cfg.url || !cfg.anonKey) {
+                  setSupabaseConnected(false);
+                  showToast('Koneksi Supabase diputus (kembali ke mode lokal).', 'info');
+                } else {
+                  showToast('Menghubungkan ke Supabase Cloud...', 'info');
+                }
+              },
+              onPushAllToSupabase: pushAllToSupabase,
+              onPullAllFromSupabase: () => pullAllFromSupabase(),
               onRotateToken: () => {
                 const next = genToken();
                 setExamToken(next);
                 setTokenSecondsLeft(TOKEN_ROTATION_SECONDS);
+                if (supabaseClient && supabaseConnected) {
+                  supabaseClient.from('exam_settings').upsert({ id: 1, exam_token: next }).then(() => {});
+                }
                 showToast('Token ujian baru (' + next + ') aktif selama 10 menit.', 'success');
               },
               onSaveManualToken: (custom) => {
@@ -2152,6 +1995,9 @@
                 if (clean.length < 4) return showToast('Token minimal 4 karakter.', 'error');
                 setExamToken(clean);
                 setTokenSecondsLeft(TOKEN_ROTATION_SECONDS);
+                if (supabaseClient && supabaseConnected) {
+                  supabaseClient.from('exam_settings').upsert({ id: 1, exam_token: clean }).then(() => {});
+                }
                 showToast('Token manual (' + clean + ') disimpan & hitung mundur 10 menit dimulai.', 'success');
               },
               showToast
